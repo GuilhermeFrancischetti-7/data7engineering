@@ -1,0 +1,4362 @@
+{
+  "LTipCol": [
+    [
+      "1",
+      "Colaborador"
+    ],
+    [
+      "2",
+      "Terceiro"
+    ],
+    [
+      "3",
+      "Parceiro"
+    ]
+  ],
+  "LTipFil": [
+    [
+      "M",
+      "Matriz"
+    ],
+    [
+      "F",
+      "Filial"
+    ],
+    [
+      "O",
+      "Obra"
+    ],
+    [
+      "T",
+      "Temporária"
+    ],
+    [
+      "C",
+      "Cooperativa de Trabalho"
+    ],
+    [
+      "D",
+      "Trabalhador Doméstico"
+    ],
+    [
+      "E",
+      "Empregador eSocial"
+    ]
+  ],
+  "LTipIns": [
+    [
+      "1",
+      "CNPJ"
+    ],
+    [
+      "2",
+      "CEI"
+    ],
+    [
+      "3",
+      "CPF"
+    ]
+  ],
+  "LTipoCAEPF": [
+    [
+      "1",
+      "Contribuinte Individual"
+    ],
+    [
+      "2",
+      "Produtor Rural"
+    ],
+    [
+      "3",
+      "Segurado Especial"
+    ]
+  ],
+  "LTipLgd": [
+    [
+      "A",
+      "Área"
+    ],
+    [
+      "AC",
+      "Acesso"
+    ],
+    [
+      "ACA",
+      "Acampamento"
+    ],
+    [
+      "ACL",
+      "Acesso Local"
+    ],
+    [
+      "AD",
+      "Adro"
+    ],
+    [
+      "AE",
+      "Área Especial"
+    ],
+    [
+      "AER",
+      "Aeroporto"
+    ],
+    [
+      "AL",
+      "Alameda"
+    ],
+    [
+      "AMD",
+      "Avenida Marginal Direita"
+    ],
+    [
+      "AME",
+      "Avenida Marginal Esquerda"
+    ],
+    [
+      "AN",
+      "Anel Viário"
+    ],
+    [
+      "ANT",
+      "Antiga Estrada"
+    ],
+    [
+      "ART",
+      "Artéria"
+    ],
+    [
+      "AT",
+      "Alto"
+    ],
+    [
+      "ATL",
+      "Atalho"
+    ],
+    [
+      "A V",
+      "Área Verde"
+    ],
+    [
+      "AV",
+      "Avenida"
+    ],
+    [
+      "AVC",
+      "Avenida Contorno"
+    ],
+    [
+      "AVM",
+      "Avenida Marginal"
+    ],
+    [
+      "AVV",
+      "Avenida Velha"
+    ],
+    [
+      "BAL",
+      "Balneário"
+    ],
+    [
+      "BC",
+      "Beco"
+    ],
+    [
+      "BCO",
+      "Buraco"
+    ],
+    [
+      "BEL",
+      "Belvedere"
+    ],
+    [
+      "BL",
+      "Bloco"
+    ],
+    [
+      "BLO",
+      "Balão"
+    ],
+    [
+      "BLS",
+      "Blocos"
+    ],
+    [
+      "BLV",
+      "Bulevar"
+    ],
+    [
+      "BSQ",
+      "Bosque"
+    ],
+    [
+      "BVD",
+      "Boulevard"
+    ],
+    [
+      "BX",
+      "Baixa"
+    ],
+    [
+      "C",
+      "Cais"
+    ],
+    [
+      "CAL",
+      "Calçada"
+    ],
+    [
+      "CAM",
+      "Caminho"
+    ],
+    [
+      "CAN",
+      "Canal"
+    ],
+    [
+      "CH",
+      "Chácara"
+    ],
+    [
+      "CHA",
+      "Chapadão"
+    ],
+    [
+      "CIC",
+      "Ciclovia"
+    ],
+    [
+      "CIR",
+      "Circular"
+    ],
+    [
+      "CJ",
+      "Conjunto"
+    ],
+    [
+      "CJM",
+      "Conjunto Mutirão"
+    ],
+    [
+      "CMP",
+      "Complexo Viário"
+    ],
+    [
+      "COL",
+      "Colônia"
+    ],
+    [
+      "COM",
+      "Comunidade"
+    ],
+    [
+      "COND",
+      "Condomínio"
+    ],
+    [
+      "COR",
+      "Corredor"
+    ],
+    [
+      "CPO",
+      "Campo"
+    ],
+    [
+      "CRG",
+      "Córrego"
+    ],
+    [
+      "CTN",
+      "Contorno"
+    ],
+    [
+      "DSC",
+      "Descida"
+    ],
+    [
+      "DSV",
+      "Desvio"
+    ],
+    [
+      "DT",
+      "Distrito"
+    ],
+    [
+      "EB",
+      "Entre Bloco"
+    ],
+    [
+      "EIM",
+      "Estrada Intermunicipal"
+    ],
+    [
+      "ENS",
+      "Enseada"
+    ],
+    [
+      "ENT",
+      "Entrada Particular"
+    ],
+    [
+      "EQ",
+      "Entre Quadra"
+    ],
+    [
+      "ESC",
+      "Escada"
+    ],
+    [
+      "ESD",
+      "Escadaria"
+    ],
+    [
+      "ESE",
+      "Estrada Estadual"
+    ],
+    [
+      "ESI",
+      "Estrada Vicinal"
+    ],
+    [
+      "ESL",
+      "Estrada de Ligação"
+    ],
+    [
+      "ESM",
+      "Estrada Municipal"
+    ],
+    [
+      "ESP",
+      "Esplanada"
+    ],
+    [
+      "ESS",
+      "Estrada de Servidão"
+    ],
+    [
+      "EST",
+      "Estrada"
+    ],
+    [
+      "ESV",
+      "Estrada Velha"
+    ],
+    [
+      "ETA",
+      "Estrada Antiga"
+    ],
+    [
+      "ETC",
+      "Estação"
+    ],
+    [
+      "ETD",
+      "Estádio"
+    ],
+    [
+      "ETN",
+      "Estância"
+    ],
+    [
+      "ETP",
+      "Estrada Particular"
+    ],
+    [
+      "ETT",
+      "Estacionamento"
+    ],
+    [
+      "EVA",
+      "Evangélica"
+    ],
+    [
+      "EVD",
+      "Elevada"
+    ],
+    [
+      "EX",
+      "Eixo Industrial"
+    ],
+    [
+      "FAV",
+      "Favela"
+    ],
+    [
+      "FAZ",
+      "Fazenda"
+    ],
+    [
+      "FER",
+      "Ferrovia"
+    ],
+    [
+      "FNT",
+      "Fonte"
+    ],
+    [
+      "FRA",
+      "Feira"
+    ],
+    [
+      "FTE",
+      "Forte"
+    ],
+    [
+      "GAL",
+      "Galeria"
+    ],
+    [
+      "GJA",
+      "Granja"
+    ],
+    [
+      "HAB",
+      "Núcleo Habitacional"
+    ],
+    [
+      "IA",
+      "Ilha"
+    ],
+    [
+      "IND",
+      "Indeterminado"
+    ],
+    [
+      "IOA",
+      "Ilhota"
+    ],
+    [
+      "JD",
+      "Jardim"
+    ],
+    [
+      "JDE",
+      "Jardinete"
+    ],
+    [
+      "LD",
+      "Ladeira"
+    ],
+    [
+      "LGA",
+      "Lagoa"
+    ],
+    [
+      "LGO",
+      "Lago"
+    ],
+    [
+      "LOT",
+      "Loteamento"
+    ],
+    [
+      "LRG",
+      "Largo"
+    ],
+    [
+      "LT",
+      "Lote"
+    ],
+    [
+      "MER",
+      "Mercado"
+    ],
+    [
+      "MNA",
+      "Marina"
+    ],
+    [
+      "MOD",
+      "Módulo"
+    ],
+    [
+      "MRG",
+      "Projeção"
+    ],
+    [
+      "MRO",
+      "Morro"
+    ],
+    [
+      "MTE",
+      "Monte"
+    ],
+    [
+      "NUC",
+      "Núcleo"
+    ],
+    [
+      "NUR",
+      "Núcleo Rural"
+    ],
+    [
+      "O",
+      "Outros"
+    ],
+    [
+      "OUT",
+      "Outeiro"
+    ],
+    [
+      "PAR",
+      "Paralela"
+    ],
+    [
+      "PAS",
+      "Passeio"
+    ],
+    [
+      "PAT",
+      "Pátio"
+    ],
+    [
+      "PC",
+      "Praça"
+    ],
+    [
+      "PCE",
+      "Praça de Esportes"
+    ],
+    [
+      "PDA",
+      "Parada"
+    ],
+    [
+      "PDO",
+      "Paradouro"
+    ],
+    [
+      "PNT",
+      "Ponta"
+    ],
+    [
+      "PR",
+      "Praia"
+    ],
+    [
+      "PRL",
+      "Prolongamento"
+    ],
+    [
+      "PRM",
+      "Parque Municipal"
+    ],
+    [
+      "PRQ",
+      "Parque"
+    ],
+    [
+      "PRR",
+      "Parque Residencial"
+    ],
+    [
+      "PSA",
+      "Passarela"
+    ],
+    [
+      "PSG",
+      "Passagem"
+    ],
+    [
+      "PSP",
+      "Passagem de Pedestre"
+    ],
+    [
+      "PSS",
+      "Passagem Subterrânea"
+    ],
+    [
+      "PTE",
+      "Ponte"
+    ],
+    [
+      "PTO",
+      "Porto"
+    ],
+    [
+      "Q",
+      "Quadra"
+    ],
+    [
+      "QTA",
+      "Quinta"
+    ],
+    [
+      "QTS",
+      "Quintas"
+    ],
+    [
+      "R",
+      "Rua"
+    ],
+    [
+      "R I",
+      "Rua Integração"
+    ],
+    [
+      "R L",
+      "Rua de Ligação"
+    ],
+    [
+      "R P",
+      "Rua Particular"
+    ],
+    [
+      "R V",
+      "Rua Velha"
+    ],
+    [
+      "RAM",
+      "Ramal"
+    ],
+    [
+      "RCR",
+      "Recreio"
+    ],
+    [
+      "REC",
+      "Recanto"
+    ],
+    [
+      "RER",
+      "Retiro"
+    ],
+    [
+      "RES",
+      "Residencial"
+    ],
+    [
+      "RET",
+      "Reta"
+    ],
+    [
+      "RLA",
+      "Ruela"
+    ],
+    [
+      "RMP",
+      "Rampa"
+    ],
+    [
+      "ROA",
+      "Rodo Anel"
+    ],
+    [
+      "ROD",
+      "Rodovia"
+    ],
+    [
+      "ROT",
+      "Rótula"
+    ],
+    [
+      "RPE",
+      "Rua de Pedestre"
+    ],
+    [
+      "RPR",
+      "Margem"
+    ],
+    [
+      "RTN",
+      "Retorno"
+    ],
+    [
+      "RTT",
+      "Rotatória"
+    ],
+    [
+      "SEG",
+      "Segunda Avenida"
+    ],
+    [
+      "SIT",
+      "Sitio"
+    ],
+    [
+      "SRV",
+      "Servidão"
+    ],
+    [
+      "ST",
+      "Setor"
+    ],
+    [
+      "SUB",
+      "Subida"
+    ],
+    [
+      "TCH",
+      "Trincheira"
+    ],
+    [
+      "TER",
+      "Terminal"
+    ],
+    [
+      "TR",
+      "Trecho"
+    ],
+    [
+      "TRV",
+      "Trevo"
+    ],
+    [
+      "TUN",
+      "Túnel"
+    ],
+    [
+      "TV",
+      "Travessa"
+    ],
+    [
+      "TVP",
+      "Travessa Particular"
+    ],
+    [
+      "TVV",
+      "Travessa Velha"
+    ],
+    [
+      "UNI",
+      "Unidade"
+    ],
+    [
+      "V",
+      "Via"
+    ],
+    [
+      "V C",
+      "Via Coletora"
+    ],
+    [
+      "V L",
+      "Via Local"
+    ],
+    [
+      "VAC",
+      "Via de Acesso"
+    ],
+    [
+      "VAL",
+      "Vala"
+    ],
+    [
+      "VCO",
+      "Via Costeira"
+    ],
+    [
+      "VD",
+      "Viaduto"
+    ],
+    [
+      "V-E",
+      "Via Expressa"
+    ],
+    [
+      "VER",
+      "Vereda"
+    ],
+    [
+      "VEV",
+      "Via Elevado"
+    ],
+    [
+      "VL",
+      "Vila"
+    ],
+    [
+      "VLA",
+      "Viela"
+    ],
+    [
+      "VLE",
+      "Vale"
+    ],
+    [
+      "VLT",
+      "Via Litorânea"
+    ],
+    [
+      "VPE",
+      "Via de Pedestre"
+    ],
+    [
+      "VRT",
+      "Variante"
+    ],
+    [
+      "ZIG",
+      "Zigue-Zague"
+    ]
+  ],
+  "LSimNao": [
+    [
+      "S",
+      "Sim"
+    ],
+    [
+      "N",
+      "Não"
+    ]
+  ],
+  "LBasLeg": [
+    [
+      "1",
+      "Início Inciso I do Art. 62 da CLT"
+    ],
+    [
+      "2",
+      "Término Inciso I do Art. 62 da CLT"
+    ],
+    [
+      "3",
+      "Início Inciso II do Art. 62 da CLT"
+    ],
+    [
+      "4",
+      "Término Inciso II do Art. 62 da CLT"
+    ],
+    [
+      "5",
+      "Início Inciso III do Art. 62 da CLT"
+    ],
+    [
+      "6",
+      "Fim Inciso III do Art. 62 da CLT"
+    ],
+    [
+      "7",
+      "Início do Art. 235 C da CLT"
+    ],
+    [
+      "8",
+      "Fim do Art. 235 C da CLT"
+    ]
+  ],
+  "LTpeSoc": [
+    [
+      "0",
+      "Não se Aplica"
+    ],
+    [
+      "1",
+      "Advertência"
+    ],
+    [
+      "2",
+      "Suspensão"
+    ],
+    [
+      "3",
+      "Aposentadoria"
+    ],
+    [
+      "6",
+      "Sucessão"
+    ],
+    [
+      "7",
+      "Descrição Salário"
+    ],
+    [
+      "8",
+      "Deficiência"
+    ],
+    [
+      "9",
+      "Outros"
+    ],
+    [
+      "10",
+      "Regime de Jornada"
+    ],
+    [
+      "11",
+      "Observações do Contrato de Trabalho"
+    ]
+  ],
+  "SalarioVariavel": [
+    [
+      "1",
+      "Início Salário"
+    ],
+    [
+      "2",
+      "Término Salário"
+    ]
+  ],
+  "LMesAno": [
+    [
+      "1",
+      "Janeiro"
+    ],
+    [
+      "2",
+      "Fevereiro"
+    ],
+    [
+      "3",
+      "Março"
+    ],
+    [
+      "4",
+      "Abril"
+    ],
+    [
+      "5",
+      "Maio"
+    ],
+    [
+      "6",
+      "Junho"
+    ],
+    [
+      "7",
+      "Julho"
+    ],
+    [
+      "8",
+      "Agosto"
+    ],
+    [
+      "9",
+      "Setembro"
+    ],
+    [
+      "10",
+      "Outubro"
+    ],
+    [
+      "11",
+      "Novembro"
+    ],
+    [
+      "12",
+      "Dezembro"
+    ]
+  ],
+  "LTipCon": [
+    [
+      "1",
+      "Empregado"
+    ],
+    [
+      "2",
+      "Diretor"
+    ],
+    [
+      "3",
+      "Trabalhador Rural"
+    ],
+    [
+      "4",
+      "Aposentado"
+    ],
+    [
+      "5",
+      "Estagiário"
+    ],
+    [
+      "6",
+      "Aprendiz"
+    ],
+    [
+      "7",
+      "Prazo Determinado"
+    ],
+    [
+      "8",
+      "Diretor Aposentado"
+    ],
+    [
+      "9",
+      "Agente Público"
+    ],
+    [
+      "10",
+      "Professor"
+    ],
+    [
+      "11",
+      "Cooperado"
+    ],
+    [
+      "12",
+      "Trabalhador Doméstico"
+    ],
+    [
+      "13",
+      "Professor Prazo Determinado"
+    ]
+  ],
+  "LTipSex": [
+    [
+      "M",
+      "Masculino"
+    ],
+    [
+      "F",
+      "Feminino"
+    ]
+  ],
+  "LEstCiv": [
+    [
+      "1",
+      "Solteiro"
+    ],
+    [
+      "2",
+      "Casado"
+    ],
+    [
+      "3",
+      "Divorciado"
+    ],
+    [
+      "4",
+      "Viúvo"
+    ],
+    [
+      "5",
+      "Concubinato"
+    ],
+    [
+      "6",
+      "Separado"
+    ],
+    [
+      "7",
+      "União Estável"
+    ],
+    [
+      "9",
+      "Outros"
+    ]
+  ],
+  "LVisEst": [
+    [
+      "1",
+      "Visto permanente"
+    ],
+    [
+      "2",
+      "Visto temporário"
+    ],
+    [
+      "3",
+      "Asilado"
+    ],
+    [
+      "4",
+      "Refugiado"
+    ],
+    [
+      "5",
+      "Solicitante de Refúgio"
+    ],
+    [
+      "6",
+      "Residente fora do Brasil"
+    ],
+    [
+      "7",
+      "Deficiente físico e com mais de 51 anos"
+    ],
+    [
+      "8",
+      "Com residência provisória e anistiado, em situação irregular"
+    ],
+    [
+      "9",
+      "Permanência no Brasil em razão de filhos ou cônjuge brasileiros"
+    ],
+    [
+      "10",
+      "Beneficiado pelo acordo entre países do Mercosul"
+    ],
+    [
+      "11",
+      "Dependente de agente diplomático e/ou consular de países que mantém convênio de reciprocidade para o exercício de atividade remunerada"
+    ],
+    [
+      "12",
+      "Beneficiado pelo Tratado de Amizade, Cooperação e Consulta entre a República Federativa do Brasil e a República Portuguesa"
+    ]
+  ],
+  "LEstFed": [
+    [
+      "AC",
+      "Acre"
+    ],
+    [
+      "AL",
+      "Alagoas"
+    ],
+    [
+      "AM",
+      "Amazonas"
+    ],
+    [
+      "AP",
+      "Amapá"
+    ],
+    [
+      "BA",
+      "Bahia"
+    ],
+    [
+      "CE",
+      "Ceará"
+    ],
+    [
+      "DF",
+      "Distrito Federal"
+    ],
+    [
+      "ES",
+      "Espírito Santo"
+    ],
+    [
+      "FN",
+      "Fernando de Noronha"
+    ],
+    [
+      "GO",
+      "Goiás"
+    ],
+    [
+      "MA",
+      "Maranhão"
+    ],
+    [
+      "MG",
+      "Minas Gerais"
+    ],
+    [
+      "MS",
+      "Mato Grosso do Sul"
+    ],
+    [
+      "MT",
+      "Mato Grosso"
+    ],
+    [
+      "PA",
+      "Pará"
+    ],
+    [
+      "PB",
+      "Paraíba"
+    ],
+    [
+      "PE",
+      "Pernambuco"
+    ],
+    [
+      "PI",
+      "Piauí"
+    ],
+    [
+      "PR",
+      "Paraná"
+    ],
+    [
+      "RJ",
+      "Rio de Janeiro"
+    ],
+    [
+      "RN",
+      "Rio Grande do Norte"
+    ],
+    [
+      "RO",
+      "Rondônia"
+    ],
+    [
+      "RR",
+      "Roraima"
+    ],
+    [
+      "RS",
+      "Rio Grande do Sul"
+    ],
+    [
+      "SC",
+      "Santa Catarina"
+    ],
+    [
+      "SE",
+      "Sergipe"
+    ],
+    [
+      "SP",
+      "São Paulo"
+    ],
+    [
+      "TO",
+      "Tocantins"
+    ],
+    [
+      "XX",
+      "Estrangeiros"
+    ]
+  ],
+  "LPagSin": [
+    [
+      "S",
+      "Sim"
+    ],
+    [
+      "N",
+      "Não"
+    ],
+    [
+      "M",
+      "Recolhe p/Sua Classe"
+    ],
+    [
+      "P",
+      "Próximo Ano"
+    ]
+  ],
+  "LModPag": [
+    [
+      "C",
+      "Cheque"
+    ],
+    [
+      "D",
+      "Dinheiro"
+    ],
+    [
+      "O",
+      "Ordem Pagto"
+    ],
+    [
+      "R",
+      "Relação Bancária"
+    ],
+    [
+      "E",
+      "Externo - Válido somente para eSocial"
+    ]
+  ],
+  "LTipApo": [
+    [
+      "1",
+      "Tempo Serviço"
+    ],
+    [
+      "2",
+      "Tempo Serviço Proporcional"
+    ],
+    [
+      "3",
+      "Idade"
+    ],
+    [
+      "4",
+      "Invalidez"
+    ],
+    [
+      "5",
+      "Invalidez Acidente Trabalho"
+    ],
+    [
+      "6",
+      "Invalidez Doença Profissional"
+    ],
+    [
+      "7",
+      "Compulsória"
+    ],
+    [
+      "8",
+      "Especial"
+    ]
+  ],
+  "LOutCon": [
+    [
+      "U",
+      "Contrato Único"
+    ],
+    [
+      "F",
+      "Outro Contrato Fora do Sistema"
+    ],
+    [
+      "S",
+      "Outro Contrato Dentro do Sistema"
+    ],
+    [
+      "T",
+      "Terceiros com Mesmo CPF"
+    ]
+  ],
+  "LRacCor": [
+    [
+      "0",
+      "Não Informado"
+    ],
+    [
+      "1",
+      "Branca"
+    ],
+    [
+      "2",
+      "Preta"
+    ],
+    [
+      "3",
+      "Amarela"
+    ],
+    [
+      "4",
+      "Parda"
+    ],
+    [
+      "5",
+      "Indígena"
+    ],
+    [
+      "6",
+      "Mameluco"
+    ],
+    [
+      "7",
+      "Mulato"
+    ],
+    [
+      "8",
+      "Cafuzo"
+    ]
+  ],
+  "LCatSef": [
+    [
+      "1",
+      "Empregado"
+    ],
+    [
+      "2",
+      "Trabalhador avulso"
+    ],
+    [
+      "3",
+      "Trabalh.ñ vinculado ao RGPS, c/ direito ao FGTS"
+    ],
+    [
+      "4",
+      "Empreg.s/ contr.trab.prazo determ.(Lei n* 9.601/98)"
+    ],
+    [
+      "5",
+      "Contr.Indiv./Diretor ñ empr.c/FGTS(Lei nº 8.036/90)"
+    ],
+    [
+      "6",
+      "Empregado Doméstico"
+    ],
+    [
+      "7",
+      "Menor Aprendiz ( Lei 10.097/2000)"
+    ],
+    [
+      "11",
+      "Contrib.Indiv./Diretor ñ empr.+ empresários s/ FGTS"
+    ],
+    [
+      "12",
+      "Demais Agentes Públicos"
+    ],
+    [
+      "13",
+      "Contr.Indiv.Trab.Autôn. + Cooper. c/ Serv.PF"
+    ],
+    [
+      "14",
+      "Contr.Indiv./Trab.autôn.+ oper.máq. c/contr.s/salário"
+    ],
+    [
+      "15",
+      "Contr.Indv.Transp.Autôn.+Trans.Cooper.p/Serv.PF"
+    ],
+    [
+      "16",
+      "Contr.Indiv./Transp.autôn.c/ contrib. s/ salário-base"
+    ],
+    [
+      "17",
+      "Contr.Indiv./Cooper.c/ serv.contratantes.Cooper.Trab."
+    ],
+    [
+      "18",
+      "Contr.Indiv./Transp.Cooper.c/ contratan.Cooper.Trab."
+    ],
+    [
+      "19",
+      "Agente Político"
+    ],
+    [
+      "20",
+      "Serv.Públ.Ocup., excl.comissão, Serv.Púb.Cargo Temp."
+    ],
+    [
+      "21",
+      "Serv.Públ.Car.ef.,mag.,memb.Min.Púb./Trib.Cons.Cntas"
+    ],
+    [
+      "22",
+      "Contr.Indiv. contratado p/Contr. Indiv./Prod.Rural"
+    ],
+    [
+      "23",
+      "Contr.Indiv.Transp. Autôn.contr.p/Contr.Ind./Pr.Rural"
+    ],
+    [
+      "24",
+      "Contr.Indiv. Cooper.-Serv p/ Entidade Beneficente"
+    ],
+    [
+      "25",
+      "Contr.Indiv. Transp.Cooper.-Serv.p/Entid. Benefic."
+    ],
+    [
+      "26",
+      "Dirigente Sindical, magistrado da Justiça Trabalho e Tribunais Eleitorais (sem FGTS)"
+    ],
+    [
+      "99",
+      "Não Considera no SEFIP"
+    ]
+  ],
+  "LMovSef": [
+    [
+      "H",
+      "Rescisão, com justa causa, por iniciativa do empregador"
+    ],
+    [
+      "I1",
+      "Rescisão, sem justa causa, por iniciativa do empregador"
+    ],
+    [
+      "I2",
+      "Rescisão por culpa recíproca ou força maior"
+    ],
+    [
+      "I3",
+      "Rescisão por término do contrato a termo"
+    ],
+    [
+      "I4",
+      "Rescisão, sem justa causa, do contrato de trabalho do empregado doméstico, por iniciativa do empregador"
+    ],
+    [
+      "I5",
+      "Rescisão do Contrato por Motivo de Acordo"
+    ],
+    [
+      "J",
+      "Rescisão do contrato de trabalho por iniciativa do empregado"
+    ],
+    [
+      "K",
+      "Rescisão a pedido do empregado ou por iniciativa do empregador, com justa causa, no caso de empregado não optante, com menos de um ano de serviço"
+    ],
+    [
+      "L",
+      "Outros motivos de rescisão do contrato de trabalho"
+    ],
+    [
+      "M",
+      "Mudança de regime estatutário"
+    ],
+    [
+      "N1",
+      "Transferência do empregado para outro estabelecimento da mesma empresa"
+    ],
+    [
+      "N2",
+      "Transferência do empregado para outra empresa que tenha assumido os encargos trabalhistas, sem que tenha havido rescisão de contrato de trabalho"
+    ],
+    [
+      "N3",
+      "Empregado proveniente de transferência de outro estabelecimento da mesma empresa ou de outra empresa, sem rescisão do contrato de trabalho"
+    ],
+    [
+      "O1",
+      "Afastamento temporário por motivo de acidente do trabalho, por período superior a 15 dias"
+    ],
+    [
+      "O2",
+      "Novo afastamento temporário em decorrência do mesmo acidente do trabalho"
+    ],
+    [
+      "O3",
+      "Afastamento temporário por motivo de acidente do trabalho, por período igual ou inferior a 15 dias"
+    ],
+    [
+      "P1",
+      "Afastamento temporário por motivo de doença, por período superior a 15 dias"
+    ],
+    [
+      "P2",
+      "Novo afastamento temporário em decorrência da mesma doença, dentro de 60 dias contados da cessação do afastamento anterior"
+    ],
+    [
+      "P3",
+      "Afastamento Temporário por Motivo de Doença, Período Igual ou Inferior a 15 Dias"
+    ],
+    [
+      "Q1",
+      "Afastamento temporário por motivo de licença-maternidade (120 dias)"
+    ],
+    [
+      "Q2",
+      "Prorrogação do afastamento temporário por motivo de licença-maternidade"
+    ],
+    [
+      "Q3",
+      "Afastamento temporário por motivo de aborto não criminoso"
+    ],
+    [
+      "Q4",
+      "Afastamento temporário por motivo de licença-maternidade decorrente de adoção ou guarda judicial de criança até (um) ano de idade (120 dias)"
+    ],
+    [
+      "Q5",
+      "Afastamento temporário por motivo de licença-maternidade decorrente de adoção ou guarda judicial de criança a partir de 1(um) ano até 4(quatro) anos de idade (60 dias)"
+    ],
+    [
+      "Q6",
+      "Afastamento temporário por motivo de licença-maternidade decorrente de adoção ou guarda judicial de criança de 4 (quatro) até 8 (oito) anos de idade (30 dias)"
+    ],
+    [
+      "Q7",
+      "Afastamento temporário por motivo de aborto não criminoso do empregado do Microempreendedor - MEI"
+    ],
+    [
+      "R",
+      "Afastamento temporário para prestar serviço militar"
+    ],
+    [
+      "R1",
+      "Trabalhador Contrato por Prazo Determinado"
+    ],
+    [
+      "S2",
+      "Falecimento"
+    ],
+    [
+      "S3",
+      "Falecimento motivado por acidente do trabalho"
+    ],
+    [
+      "T1",
+      "Início da prestação de serviços do empregado intermitente"
+    ],
+    [
+      "T2",
+      "Término da prestação de serviços do empregado intermitente"
+    ],
+    [
+      "U1",
+      "Aposentadoria"
+    ],
+    [
+      "U2",
+      "Aposentadoria por tempo de contribuição ou idade com continuidade de vínculo empregatício (extinta na Sefip 8.3)"
+    ],
+    [
+      "U3",
+      "Aposentadoria por invalidez"
+    ],
+    [
+      "V3",
+      "Remuneração de comissão e/ou percentagens devidas após a extinção de contrato de trabalho"
+    ],
+    [
+      "W",
+      "Afastamento temporário para exercício de mandato sindical"
+    ],
+    [
+      "X",
+      "Licença sem vencimentos"
+    ],
+    [
+      "X1",
+      "Trabalhador Contrato Verde e Amarelo"
+    ],
+    [
+      "Y",
+      "Outros motivos de afastamento temporário"
+    ],
+    [
+      "Z1",
+      "Retorno de afastamento temporário por motivo de licença-maternidade"
+    ],
+    [
+      "Z2",
+      "Retorno de afastamento temporário por motivo de acidente do trabalho"
+    ],
+    [
+      "Z3",
+      "Retorno de novo afastamento temporário em decorrência do mesmo acidente do trabalho"
+    ],
+    [
+      "Z4",
+      "Retorno de afastamento temporário por motivo de prestação de serviço militar"
+    ],
+    [
+      "Z5",
+      "Outros retornos de afastamento temporário e/ou licença"
+    ],
+    [
+      "Z6",
+      "Retorno de afastamento temporário por motivo de acidente do trabalho, por período igual ou inferior a 15 dias"
+    ]
+  ],
+  "LDocIdn": [
+    [
+      "1",
+      "Cédula de Ciudadanía"
+    ],
+    [
+      "2",
+      "Tarjeta de Identidad"
+    ],
+    [
+      "3",
+      "Registro Civil de Nacimiento"
+    ],
+    [
+      "4",
+      "Cédula de Estrangeria"
+    ],
+    [
+      "5",
+      "Pasaporte"
+    ],
+    [
+      "99",
+      "Otros"
+    ]
+  ],
+  "LTpCtBa": [
+    [
+      "1",
+      "Conta Corrente"
+    ],
+    [
+      "2",
+      "Conta Poupança"
+    ],
+    [
+      "3",
+      "Conta Salário"
+    ],
+    [
+      "9",
+      "Outros"
+    ]
+  ],
+  "LConRho": [
+    [
+      "1",
+      "Controle de Ponto e Refeitório"
+    ],
+    [
+      "2",
+      "Controle de Ponto"
+    ],
+    [
+      "3",
+      "Controle de Refeitório"
+    ],
+    [
+      "4",
+      "Não Conta"
+    ]
+  ],
+  "LPerPag": [
+    [
+      "M",
+      "Mensal"
+    ],
+    [
+      "S",
+      "Semanal"
+    ],
+    [
+      "Q",
+      "Quinzenal"
+    ]
+  ],
+  "LOrgCla": [
+    [
+      "1",
+      "Conselho Regional de Medicina (CRM)"
+    ],
+    [
+      "2",
+      "Conselho Regional de Odontologia (CRO)"
+    ],
+    [
+      "3",
+      "Registro do Ministério da Saúde (RMS)"
+    ]
+  ],
+  "LMovRai": [
+    [
+      "10",
+      "Acidente de trabalho típico."
+    ],
+    [
+      "20",
+      "Acidente do trabalho de trajeto"
+    ],
+    [
+      "30",
+      "Doença relacionada ao trabalho"
+    ],
+    [
+      "40",
+      "Doença não relacionada ao trabalho"
+    ],
+    [
+      "50",
+      "Licença Maternidade(e Paternidade até 2005)"
+    ],
+    [
+      "60",
+      "Serviço militar obrigatório"
+    ],
+    [
+      "70",
+      "Licença sem Remuneração/Vencimentos"
+    ]
+  ],
+  "LTipAdm": [
+    [
+      "1",
+      "Primeiro Emprego"
+    ],
+    [
+      "2",
+      "Reemprego"
+    ],
+    [
+      "3",
+      "Transferência c/ Ônus"
+    ],
+    [
+      "4",
+      "Transferência s/ Ônus"
+    ],
+    [
+      "5",
+      "Incorporação/Fusão/Cisão/Outros"
+    ],
+    [
+      "6",
+      "Reintegração"
+    ],
+    [
+      "7",
+      "Recondução (Servidor Público)"
+    ],
+    [
+      "8",
+      "Reversão (Servidor Público)"
+    ],
+    [
+      "9",
+      "Provisório de servidor do mesmo órgão/entidade"
+    ],
+    [
+      "10",
+      "Requisição"
+    ],
+    [
+      "11",
+      "Redistribuição (Servidor Público)"
+    ],
+    [
+      "12",
+      "Descentralizado de servidor do mesmo órgão/entidade"
+    ],
+    [
+      "13",
+      "Remoção (Servidor Público)"
+    ],
+    [
+      "14",
+      "Readaptação (Servidor Público)"
+    ]
+  ],
+  "LAdmeSo": [
+    [
+      "1",
+      "Admissão"
+    ],
+    [
+      "2",
+      "Transferência de empresa do mesmo grupo econômico"
+    ],
+    [
+      "3",
+      "Transferência de empresa consorciada ou de consórcio"
+    ],
+    [
+      "4",
+      "Transferência por motivo de sucessão, incorporação, cisão ou fusão"
+    ],
+    [
+      "9",
+      "Trabalhador Cedido (específico Senior)"
+    ]
+  ],
+  "LCodEtb": [
+    [
+      "0",
+      "Não Estável"
+    ],
+    [
+      "1",
+      "Eleito Titular CIPA"
+    ],
+    [
+      "2",
+      "Acidente Trabalho"
+    ],
+    [
+      "3",
+      "Auxílio Maternidade"
+    ],
+    [
+      "4",
+      "Serviço Militar"
+    ],
+    [
+      "5",
+      "Mandato Sindical"
+    ],
+    [
+      "6",
+      "Servidor Público"
+    ],
+    [
+      "7",
+      "Retorno Férias"
+    ],
+    [
+      "8",
+      "Retorno Auxílio-Doença"
+    ],
+    [
+      "9",
+      "Tempo Próximo Aposentadoria"
+    ],
+    [
+      "10",
+      "Convenção Coletiva (Dissídio)"
+    ],
+    [
+      "11",
+      "Tempo Anterior Opção FGTS"
+    ],
+    [
+      "12",
+      "Não Optante FGTS"
+    ],
+    [
+      "13",
+      "CIPA Empregador"
+    ],
+    [
+      "14",
+      "Membro da Comissão de Conciliação Prévia"
+    ],
+    [
+      "15",
+      "Membro do Conselho Curador do FGTS"
+    ],
+    [
+      "16",
+      "Membro do Conselho Nacional da Previdência Social"
+    ],
+    [
+      "17",
+      "Auxílio Educação"
+    ],
+    [
+      "18",
+      "Cooperativa de Consumo"
+    ],
+    [
+      "19",
+      "Cooperativa de Crédito"
+    ],
+    [
+      "20",
+      "Pessoa com Deficiência (PcD)"
+    ],
+    [
+      "21",
+      "Cooperativa do Sindicato"
+    ],
+    [
+      "22",
+      "CIPATR"
+    ],
+    [
+      "23",
+      "Licença Paternidade"
+    ],
+    [
+      "24",
+      "Mandato Eleitoral"
+    ],
+    [
+      "25",
+      "Candidato da CIPA"
+    ],
+    [
+      "26",
+      "Eleito Suplente CIPA"
+    ],
+    [
+      "99",
+      "Outros"
+    ]
+  ],
+  "LApoEsp": [
+    [
+      "0",
+      "Não possui aposentadoria especial"
+    ],
+    [
+      "1",
+      "Não exposição a agente nocivo. Trabalhador já esteve exposto"
+    ],
+    [
+      "15",
+      "Apos. especial aos quinze anos de serviço"
+    ],
+    [
+      "20",
+      "Apos. especial aos vinte anos de serviço"
+    ],
+    [
+      "25",
+      "Apos. especial aos vinte e cinco anos de serviço"
+    ]
+  ],
+  "LCateSo": [
+    [
+      "101",
+      "Empregado - Geral, inclusive o empregado público da administração direta ou indireta contratado pela CLT"
+    ],
+    [
+      "102",
+      "Empregado - Trabalhador Rural por Pequeno Prazo da Lei 11.718/2008"
+    ],
+    [
+      "103",
+      "Empregado - Aprendiz"
+    ],
+    [
+      "104",
+      "Empregado - Doméstico"
+    ],
+    [
+      "105",
+      "Empregado - contrato a termo firmado nos termos da Lei 9601/98"
+    ],
+    [
+      "106",
+      "Trabalhador Temporário - contrato por prazo determinado nos termos da Lei 6019/74"
+    ],
+    [
+      "107",
+      "Empregado - Contrato de trabalho Verde e Amarelo - sem acordo para antecipação mensal da multa rescisória do FGTS"
+    ],
+    [
+      "108",
+      "Empregado - Contrato de trabalho Verde e Amarelo - com acordo para antecipação mensal da multa rescisória do FGTS"
+    ],
+    [
+      "111",
+      "Empregado - contrato de trabalho intermitente"
+    ],
+    [
+      "201",
+      "Trabalhador Avulso - Portuário"
+    ],
+    [
+      "202",
+      "Trabalhador Avulso - Não Portuário"
+    ],
+    [
+      "301",
+      "Servidor Público - Titular de Cargo Efetivo, Magistrado, Ministro de Tribunal de Contas, Conselheiro de Tribunal Contas e Membro 302 Servidor Público - Ocupante de Cargo exclusivo em comissão"
+    ],
+    [
+      "302",
+      "Servidor Público - Ocupante de cargo exclusivo em comissão"
+    ],
+    [
+      "303",
+      "Agente Político"
+    ],
+    [
+      "305",
+      "Servidor Público indicado para conselho ou órgão representativo, na condição de representante do governo, órgão ou entidade 306 Servidor Público Temporário, sujeito a regime administrativo especial definido em lei própria"
+    ],
+    [
+      "306",
+      "Servidor Público Temporário, sujeito a regime administrativo especial definido em lei própria"
+    ],
+    [
+      "307",
+      "Militar efetivo"
+    ],
+    [
+      "308",
+      "Conscrito"
+    ],
+    [
+      "309",
+      "Agente Público - Outros"
+    ],
+    [
+      "401",
+      "Dirigente Sindical - informação prestada pelo Sindicato"
+    ],
+    [
+      "410",
+      "Trabalhador cedido - informação prestada pelo Cessionário"
+    ],
+    [
+      "701",
+      "Contribuinte individual - Autônomo em geral, exceto se enquadrado em uma das demais categorias de contribuinte individual"
+    ],
+    [
+      "711",
+      "Contribuinte individual - Transportador autônomo de passageiros"
+    ],
+    [
+      "712",
+      "Contribuinte individual - Transportador autônomo de carga"
+    ],
+    [
+      "721",
+      "Contribuinte individual - Diretor não empregado com FGTS"
+    ],
+    [
+      "722",
+      "Contribuinte individual - Diretor não empregado sem FGTS"
+    ],
+    [
+      "723",
+      "Contribuinte individual - empresários, sócios e membro de conselho de administração ou fiscal"
+    ],
+    [
+      "731",
+      "Contribuinte individual - Cooperado que presta serviços a empresa por intermédio de cooperativa de trabalho"
+    ],
+    [
+      "734",
+      "Contribuinte individual - Transportador Cooperado que presta serviços por intermédio de cooperativa de trabalho"
+    ],
+    [
+      "738",
+      "Contribuinte individual - Cooperado filiado a Cooperativa de Produção"
+    ],
+    [
+      "741",
+      "Contribuinte individual - Micro Empreendedor Individual"
+    ],
+    [
+      "751",
+      "Contribuinte individual - magistrado classista temporário da Justiça do Trabalho ou da Justiça Eleitoral que seja aposentado 761 Contribuinte individual - Associado eleito para direção de Cooperativa, associação ou entidade de classe de qualquer natureza 771 Contribuinte individual - Membro de conselho tutelar, nos termos da Lei nº 8.069, de 13 de julho de 1990"
+    ],
+    [
+      "761",
+      "Contribuinte Individual - associado eleito para direção de Cooperativa, associação ou entidade de classe de qualquer natureza ou finalidade, bem como o síndico ou adm., desde que recebam remuneração."
+    ],
+    [
+      "771",
+      "Contribuinte Individual - Menbro de conselho tutelar, nos termos da Lei nº 8.069, de 13 de julho de 1990."
+    ],
+    [
+      "781",
+      "Ministro de confissão religiosa ou membro de vida consagrada, de congregação ou de ordem religiosa"
+    ],
+    [
+      "901",
+      "Estagiário"
+    ],
+    [
+      "902",
+      "Médico Residente"
+    ],
+    [
+      "903",
+      "Bolsista, nos termos da lei 8958/1994"
+    ],
+    [
+      "904",
+      "Participante de curso de formação, como etapa de concurso público, sem vínculo de emprego/estatutário"
+    ],
+    [
+      "905",
+      "Atleta não profissional em formação que receba bolsa"
+    ],
+    [
+      "997",
+      "Demitido com data anterior à sucessão (categoria exclusiva Senior)."
+    ],
+    [
+      "999",
+      "Não se aplica"
+    ]
+  ],
+  "LTipSal": [
+    [
+      "1",
+      "Mensalista"
+    ],
+    [
+      "2",
+      "Horista"
+    ],
+    [
+      "3",
+      "Diarista"
+    ],
+    [
+      "4",
+      "Comissionado"
+    ],
+    [
+      "5",
+      "Tarefeiro"
+    ],
+    [
+      "6",
+      "Terceiro"
+    ]
+  ],
+  "LGraPar": [
+    [
+      "1",
+      "Filho(a)"
+    ],
+    [
+      "2",
+      "Cônjuge"
+    ],
+    [
+      "3",
+      "Pai/Mãe"
+    ],
+    [
+      "4",
+      "Avô/Avó"
+    ],
+    [
+      "5",
+      "Bisavô(ó)"
+    ],
+    [
+      "6",
+      "Sobrinho(a)"
+    ],
+    [
+      "7",
+      "Tio(a)"
+    ],
+    [
+      "8",
+      "Neto(a)"
+    ],
+    [
+      "9",
+      "Sogro(a)"
+    ],
+    [
+      "10",
+      "Genro/Nora"
+    ],
+    [
+      "11",
+      "Enteado(a)"
+    ],
+    [
+      "12",
+      "Irmão(a)"
+    ],
+    [
+      "14",
+      "Filho(a) Adotivo(a)"
+    ],
+    [
+      "15",
+      "Pensionistas"
+    ],
+    [
+      "16",
+      "Companheiro(a)"
+    ],
+    [
+      "17",
+      "Tutelado"
+    ],
+    [
+      "18",
+      "Menor sob Guarda"
+    ],
+    [
+      "19",
+      "Madrasta"
+    ],
+    [
+      "20",
+      "Padrasto"
+    ],
+    [
+      "21",
+      "Tutor"
+    ],
+    [
+      "22",
+      "Ex-Esposo(a)"
+    ],
+    [
+      "23",
+      "Bisneto(a)"
+    ],
+    [
+      "24",
+      "Ex-Companheiro(a)"
+    ],
+    [
+      "25",
+      "Concubino(a)"
+    ],
+    [
+      "26",
+      "Curatelado"
+    ],
+    [
+      "99",
+      "Outros"
+    ]
+  ],
+  "LTipDepeSo": [
+    [
+      "0",
+      "Não levar Dependente para eSocial"
+    ],
+    [
+      "1",
+      "Cônjuge"
+    ],
+    [
+      "2",
+      "Companheiro(a) com o(a) qual tenha filho ou viva há mais de 5 (cinco) anos ou possua Declaração de União Estável"
+    ],
+    [
+      "3",
+      "Filho(a) ou enteado(a)"
+    ],
+    [
+      "4",
+      "Filho(a) ou enteado(a), universitário(a) ou cursando escola técnica de 2º grau"
+    ],
+    [
+      "6",
+      "Irmão(ã), neto(a) ou bisneto(a) sem arrimo dos pais, do(a) qual detenha a guarda judicial"
+    ],
+    [
+      "7",
+      "Irmão(ã), neto(a) ou bisneto(a) sem arrimo dos pais, universitário(a) ou cursando escola técnica de 2° grau, do(a) qual detenha a guarda judicial"
+    ],
+    [
+      "9",
+      "Pais, avós e bisavós"
+    ],
+    [
+      "10",
+      "Menor pobre do qual detenha a guarda judicial"
+    ],
+    [
+      "11",
+      "A pessoa absolutamente incapaz, da qual seja tutor ou curador"
+    ],
+    [
+      "12",
+      "Ex-cônjuge"
+    ],
+    [
+      "99",
+      "Agregado/Outros"
+    ]
+  ],
+  "LSitPer": [
+    [
+      "0",
+      "Aberto"
+    ],
+    [
+      "1",
+      "Quitado Normal"
+    ],
+    [
+      "2",
+      "Quitado Rescisão"
+    ],
+    [
+      "3",
+      "Quitado p/ Faltas"
+    ],
+    [
+      "4",
+      "Quitado p/ Afastamento"
+    ],
+    [
+      "5",
+      "Quitado p/ Lic.Remunerada"
+    ],
+    [
+      "6",
+      "Quitado p/ Férias Coletivas - menos 1 ano"
+    ],
+    [
+      "7",
+      "Quitado p/ Transferência"
+    ],
+    [
+      "8",
+      "Quitado p/ Indenização"
+    ],
+    [
+      "9",
+      "Gerado por Ajuste"
+    ],
+    [
+      "10",
+      "Quitado p/ Falta de Gozo"
+    ],
+    [
+      "11",
+      "Quitado p/ Perda Total do Período"
+    ]
+  ],
+  "LTpRcFe": [
+    [
+      "C",
+      "Coletivas"
+    ],
+    [
+      "N",
+      "Normais"
+    ],
+    [
+      "T",
+      "Todas"
+    ]
+  ],
+  "LAviPre": [
+    [
+      "1",
+      "Cumpriu Integral"
+    ],
+    [
+      "2",
+      "Não Cumpriu"
+    ]
+  ],
+  "LSabCom": [
+    [
+      "1",
+      "Já Compensado Até Dia da Rescisão"
+    ],
+    [
+      "2",
+      "Não Compensado"
+    ]
+  ],
+  "LTerQui": [
+    [
+      "0",
+      "Não se aplica"
+    ],
+    [
+      "1",
+      "Pagamento na empresa"
+    ],
+    [
+      "2",
+      "Pagamento com homologação"
+    ]
+  ],
+  "LTemDis": [
+    [
+      "E",
+      "Diferenças por Erro/Omissão"
+    ],
+    [
+      "C",
+      "Comissões Pendentes"
+    ],
+    [
+      "D",
+      "Dissídio Coletivo"
+    ]
+  ],
+  "LOriPen": [
+    [
+      "C",
+      "Cálculo Normal"
+    ],
+    [
+      "F",
+      "Férias"
+    ],
+    [
+      "R",
+      "Rescisão"
+    ],
+    [
+      "P",
+      "Rescisão Complementar"
+    ],
+    [
+      "I",
+      "Indenização"
+    ],
+    [
+      "T",
+      "Terceiros"
+    ]
+  ],
+  "LTipPen": [
+    [
+      "N",
+      "Normal"
+    ],
+    [
+      "F",
+      "Férias"
+    ],
+    [
+      "D",
+      "13° Salário"
+    ],
+    [
+      "P",
+      "Participação nos Lucros"
+    ],
+    [
+      "T",
+      "Terceiros"
+    ]
+  ],
+  "LTipTur": [
+    [
+      "1",
+      "1º Turno"
+    ],
+    [
+      "2",
+      "2º Turno"
+    ],
+    [
+      "3",
+      "3º Turno"
+    ],
+    [
+      "4",
+      "4º Turno"
+    ],
+    [
+      "8",
+      "Misto"
+    ],
+    [
+      "9",
+      "Geral"
+    ]
+  ],
+  "LTipHor": [
+    [
+      "1",
+      "Rígido"
+    ],
+    [
+      "2",
+      "Móvel"
+    ],
+    [
+      "3",
+      "Flexível"
+    ],
+    [
+      "4",
+      "Móvel Entrada/Saída"
+    ],
+    [
+      "5",
+      "Móvel Refeição"
+    ],
+    [
+      "6",
+      "Flexível nos Intervalos"
+    ]
+  ],
+  "LTipoIntervaloJornada": [
+    [
+      "1",
+      "Intervalo em Horário Fixo"
+    ],
+    [
+      "2",
+      "Intervalo em Horário Variável"
+    ],
+    [
+      "3",
+      "Sem Intervalo"
+    ]
+  ],
+  "LUsoBat": [
+    [
+      "1",
+      "Ent/Sai Obrigatória"
+    ],
+    [
+      "2",
+      "Ent/Sai Não Obrigatória"
+    ],
+    [
+      "3",
+      "Ent/Sai Gerada"
+    ],
+    [
+      "4",
+      "Refeição Obrigatória"
+    ],
+    [
+      "5",
+      "Refeição Pré-Assinalada Não Obrigatória"
+    ],
+    [
+      "6",
+      "Refeição Obrigatória, Extra"
+    ],
+    [
+      "8",
+      "Refeição Não Obrigatória, Def.Tol."
+    ],
+    [
+      "9",
+      "Refeição Pré-Assinalada Gerada"
+    ],
+    [
+      "12",
+      "Lanche Obrigatório"
+    ],
+    [
+      "13",
+      "Lanche Não Obrigatório"
+    ],
+    [
+      "14",
+      "Lanche Obrigatório, Extra"
+    ]
+  ],
+  "LTipEsc": [
+    [
+      "P",
+      "Permanente"
+    ],
+    [
+      "B",
+      "Busca Automática"
+    ],
+    [
+      "D",
+      "Definida"
+    ],
+    [
+      "G",
+      "Geração Automática"
+    ]
+  ],
+  "LTipFer": [
+    [
+      "P",
+      "Próprio"
+    ],
+    [
+      "F",
+      "Filial"
+    ],
+    [
+      "L",
+      "Local"
+    ],
+    [
+      "N",
+      "Não tem Feriado"
+    ]
+  ],
+  "LTipoJornada": [
+    [
+      "1",
+      "Jornada Semanal (segunda a domingo) com apenas um horário padrão por dia da semana e folga fixa"
+    ],
+    [
+      "2",
+      "Jornada 12 x 36 (12 horas de trabalho seguidas de 36 horas ininterruptas de descanso)"
+    ],
+    [
+      "3",
+      "Jornada com horário diário fixo e folga variável"
+    ],
+    [
+      "9",
+      "Demais tipos de jornada (escala, turno de revezamento, permutas, horários rotativos, etc.)"
+    ]
+  ],
+  "LIndAdm": [
+    [
+      "1",
+      "Normal"
+    ],
+    [
+      "2",
+      "Decorrente de Ação Fiscal (celetista)"
+    ],
+    [
+      "3",
+      "Decorrente de Decisão Judicial"
+    ]
+  ],
+  "LCnpjCpf": [
+    [
+      "1",
+      "CNPJ"
+    ],
+    [
+      "2",
+      "CPF"
+    ]
+  ],
+  "LRegPre": [
+    [
+      "1",
+      "RPPS (Regime Próprio)"
+    ],
+    [
+      "2",
+      "RGPS (Regime Geral)"
+    ],
+    [
+      "3",
+      "RPPE - Regime Próprio de Previdência Social no Exterior"
+    ],
+    [
+      "99",
+      "Outros"
+    ]
+  ],
+  "LOnuCes": [
+    [
+      "1",
+      "Cedente"
+    ],
+    [
+      "2",
+      "Cessionário"
+    ],
+    [
+      "3",
+      "Cedente e Cessionário"
+    ]
+  ],
+  "LSegDes": [
+    [
+      "0",
+      "Não consultado"
+    ],
+    [
+      "1",
+      "Não está recebendo"
+    ],
+    [
+      "2",
+      "Está recebendo ou efetuou entrada no requerimento"
+    ]
+  ],
+  "LNatEtg": [
+    [
+      "O",
+      "Obrigatório"
+    ],
+    [
+      "N",
+      "Não Obrigatório"
+    ]
+  ],
+  "LNivEtg": [
+    [
+      "1",
+      "Fundamental"
+    ],
+    [
+      "2",
+      "Médio"
+    ],
+    [
+      "3",
+      "Formação Profissional"
+    ],
+    [
+      "4",
+      "Superior"
+    ],
+    [
+      "8",
+      "Especial"
+    ],
+    [
+      "9",
+      "Mãe social. (Lei 7644, de 1987)"
+    ]
+  ],
+  "LTipMot": [
+    [
+      "E",
+      "Espontâneo"
+    ],
+    [
+      "L",
+      "Legal"
+    ]
+  ],
+  "LMtvAlt": [
+    [
+      "0",
+      "Não se Aplica"
+    ],
+    [
+      "1",
+      "Promoção"
+    ],
+    [
+      "2",
+      "Readaptação"
+    ],
+    [
+      "3",
+      "Aproveitamento"
+    ],
+    [
+      "8",
+      "Outros"
+    ]
+  ],
+  "LTpoMvt": [
+    [
+      "0",
+      "Admissão"
+    ],
+    [
+      "1",
+      "Mérito"
+    ],
+    [
+      "2",
+      "Enquadramento"
+    ],
+    [
+      "3",
+      "Promoção"
+    ]
+  ],
+  "LTipCal": [
+    [
+      "11",
+      "Cálculo Mensal"
+    ],
+    [
+      "12",
+      "Folha Complementar"
+    ],
+    [
+      "13",
+      "Complementar de Dissídio"
+    ],
+    [
+      "14",
+      "Pagamento de Dissídio"
+    ],
+    [
+      "15",
+      "Complementar Rescisão"
+    ],
+    [
+      "21",
+      "Primeira Semana"
+    ],
+    [
+      "22",
+      "Semana Intermediária"
+    ],
+    [
+      "23",
+      "Última Semana"
+    ],
+    [
+      "31",
+      "Adiantamento 13º Salário"
+    ],
+    [
+      "32",
+      "13º Salário Integral"
+    ],
+    [
+      "41",
+      "Primeira Quinzena"
+    ],
+    [
+      "42",
+      "Segunda Quinzena"
+    ],
+    [
+      "91",
+      "Adiantamento Salarial"
+    ],
+    [
+      "92",
+      "Participação nos Lucros"
+    ],
+    [
+      "93",
+      "Especiais"
+    ],
+    [
+      "94",
+      "Reclamatória Trabalhista"
+    ]
+  ],
+  "LJorSem": [
+    [
+      "1",
+      "Cumpriu Integral"
+    ],
+    [
+      "2",
+      "Não Cumpriu"
+    ]
+  ],
+  "LCauDem": [
+    [
+      "1",
+      "Inic.Empresa c/ Justa Causa"
+    ],
+    [
+      "2",
+      "Inic.Empresa s/ Justa Causa"
+    ],
+    [
+      "3",
+      "Inic.Empregado c/ Justa Causa"
+    ],
+    [
+      "4",
+      "Inic.Empregado s/ Justa Causa"
+    ],
+    [
+      "5",
+      "Culpa Reciproca"
+    ],
+    [
+      "6",
+      "Transferencia p/ Outra Empresa"
+    ],
+    [
+      "7",
+      "Transferencia p/ Outra Filial"
+    ],
+    [
+      "8",
+      "Morte"
+    ],
+    [
+      "9",
+      "Morte - Acidente Trabalho"
+    ],
+    [
+      "10",
+      "Morte - Doenca Profissional"
+    ],
+    [
+      "11",
+      "Abandono de Emprego"
+    ],
+    [
+      "12",
+      "Fim do Contrato de Trabalho"
+    ],
+    [
+      "13",
+      "Fim Antecipado C.T.- Empresa"
+    ],
+    [
+      "14",
+      "Fim Antecipado C.T.- Empregado"
+    ],
+    [
+      "15",
+      "Extinção da Empresa"
+    ],
+    [
+      "16",
+      "Apos.Tempo Servico c/ Rescisao"
+    ],
+    [
+      "17",
+      "Apos.Tempo Servico s/ Rescisao"
+    ],
+    [
+      "18",
+      "Apos.p/ idade c/ Rescisao"
+    ],
+    [
+      "19",
+      "Apos.p/ idade s/ Rescisao"
+    ],
+    [
+      "20",
+      "Apos.p/ Invalidez - Ac.Trabalh"
+    ],
+    [
+      "21",
+      "Apos.p/ Invalidez - Doenca Pro"
+    ],
+    [
+      "22",
+      "Apos.p/ Invalidez - Outras"
+    ],
+    [
+      "23",
+      "Aposentadoria Compulsoria"
+    ],
+    [
+      "24",
+      "Transferência por Sucessão"
+    ],
+    [
+      "25",
+      "Transferência por Sucessão"
+    ],
+    [
+      "26",
+      "Fim do Contrato de Estágio"
+    ],
+    [
+      "27",
+      "Por Acordo Lei 13.467/2017"
+    ]
+  ],
+  "LSitAfa": [
+    [
+      "1",
+      "Trabalhando"
+    ],
+    [
+      "2",
+      "Férias"
+    ],
+    [
+      "3",
+      "Auxílio Doença"
+    ],
+    [
+      "4",
+      "Acidente Trabalho"
+    ],
+    [
+      "5",
+      "Serviço Militar"
+    ],
+    [
+      "6",
+      "Licença Maternidade"
+    ],
+    [
+      "7",
+      "Demitido"
+    ],
+    [
+      "8",
+      "Lic. s/ Remuneração"
+    ],
+    [
+      "9",
+      "Lic.Rem p/ Empresa"
+    ],
+    [
+      "10",
+      "Lic. Rem. p/ Funcion."
+    ],
+    [
+      "11",
+      "Licença Paternidade"
+    ],
+    [
+      "12",
+      "Férias Coletivas"
+    ],
+    [
+      "13",
+      "Aviso Previo Trabalhado"
+    ],
+    [
+      "14",
+      "Atestado"
+    ],
+    [
+      "15",
+      "Faltas"
+    ],
+    [
+      "16",
+      "Horas Extras Não Autorizada"
+    ],
+    [
+      "19",
+      "Auxílio Maternidade INSS"
+    ],
+    [
+      "21",
+      "Férias Gozadas já Adiantadas"
+    ],
+    [
+      "22",
+      "Aposentadoria"
+    ],
+    [
+      "23",
+      "Atestado Acidente de Trabalho"
+    ],
+    [
+      "24",
+      "Lic.Maternidade Empresa Cidadã"
+    ],
+    [
+      "25",
+      "Prontidão/Sobreaviso"
+    ],
+    [
+      "26",
+      "Mandato Sindical"
+    ],
+    [
+      "37",
+      "Suspensão de Contrato MP936"
+    ]
+  ],
+  "LGraIns": [
+    [
+      "1",
+      "Analfabeto"
+    ],
+    [
+      "2",
+      "Até 5º Ano Incompleto Ens.Fun."
+    ],
+    [
+      "3",
+      "5º Ano Completo Ensino Fund."
+    ],
+    [
+      "4",
+      "6º ao 9º Incompleto Ens.Fund."
+    ],
+    [
+      "5",
+      "Ensino Fundamental Completo"
+    ],
+    [
+      "6",
+      "Ensino Médio Incompleto"
+    ],
+    [
+      "7",
+      "Ensino Médio Completo"
+    ],
+    [
+      "8",
+      "Superior Incompleto"
+    ],
+    [
+      "9",
+      "Superior Completo"
+    ],
+    [
+      "10",
+      "Pós-Graduação/Espec.Completo"
+    ],
+    [
+      "11",
+      "Mestrado Completo"
+    ],
+    [
+      "12",
+      "Doutorado Completo"
+    ],
+    [
+      "13",
+      "Pós-Doutorado Completo"
+    ]
+  ],
+  "LCodVin": [
+    [
+      "10",
+      "CLT Urb.Indet.P.Jur."
+    ],
+    [
+      "15",
+      "CLT Urb.Indet.P.Fís."
+    ],
+    [
+      "20",
+      "CLT Rural Indet.P.J."
+    ],
+    [
+      "25",
+      "CLT Rural Indet.P.F."
+    ],
+    [
+      "30",
+      "Serv.Publ./Militar"
+    ],
+    [
+      "31",
+      "Serv.Pub./Mil.Pr.Soc"
+    ],
+    [
+      "35",
+      "Serv.Pub.Não Efetivo"
+    ],
+    [
+      "40",
+      "Avulso com Dep.FGTS"
+    ],
+    [
+      "49",
+      "Trab.Doméstico"
+    ],
+    [
+      "50",
+      "Trab.Temporário"
+    ],
+    [
+      "55",
+      "Menor Aprendiz"
+    ],
+    [
+      "56",
+      "Estagiário"
+    ],
+    [
+      "60",
+      "CLT Urbano.P.J.Det."
+    ],
+    [
+      "65",
+      "CLT Urb.P.F.Det."
+    ],
+    [
+      "70",
+      "Trab.Rural P.J.Det."
+    ],
+    [
+      "75",
+      "Trab.Rural.P.F.Det."
+    ],
+    [
+      "80",
+      "Diretor ñ Empregado"
+    ],
+    [
+      "90",
+      "Trabalho Prazo Det."
+    ],
+    [
+      "95",
+      "Cont.Trb.Pr.Det.8745"
+    ],
+    [
+      "96",
+      "Cont.Trab.P.Det.Est."
+    ],
+    [
+      "97",
+      "Cont.Trab.P.Det.Mun."
+    ],
+    [
+      "98",
+      "Cont.Verde Amarelo"
+    ],
+    [
+      "99",
+      "Não Calcula Folha"
+    ]
+  ],
+  "LCodDef": [
+    [
+      "1",
+      "Fisica"
+    ],
+    [
+      "2",
+      "Auditiva"
+    ],
+    [
+      "3",
+      "Visual"
+    ],
+    [
+      "4",
+      "Intelectual (Mental)"
+    ],
+    [
+      "5",
+      "Múltipla"
+    ]
+  ],
+  "LCodNac": [
+    [
+      "10",
+      "Brasileiro"
+    ],
+    [
+      "20",
+      "Naturalizado brasileiro"
+    ],
+    [
+      "21",
+      "Argentino"
+    ],
+    [
+      "22",
+      "Boliviano"
+    ],
+    [
+      "23",
+      "Chileno"
+    ],
+    [
+      "24",
+      "Paraguaio"
+    ],
+    [
+      "25",
+      "Uruguaio"
+    ],
+    [
+      "26",
+      "Venezuelano"
+    ],
+    [
+      "27",
+      "Colombiano"
+    ],
+    [
+      "28",
+      "Peruano"
+    ],
+    [
+      "29",
+      "Equatoriano"
+    ],
+    [
+      "30",
+      "Alemão"
+    ],
+    [
+      "31",
+      "Belga"
+    ],
+    [
+      "32",
+      "Britânico"
+    ],
+    [
+      "34",
+      "Canadense"
+    ],
+    [
+      "35",
+      "Espanhol"
+    ],
+    [
+      "36",
+      "Norte-americano(EUA)"
+    ],
+    [
+      "37",
+      "Francês"
+    ],
+    [
+      "38",
+      "Suíço"
+    ],
+    [
+      "39",
+      "Italiano"
+    ],
+    [
+      "40",
+      "Haitiano"
+    ],
+    [
+      "41",
+      "Japonês"
+    ],
+    [
+      "42",
+      "Chinês"
+    ],
+    [
+      "43",
+      "Coreano"
+    ],
+    [
+      "44",
+      "Russo"
+    ],
+    [
+      "45",
+      "Português"
+    ],
+    [
+      "47",
+      "Paquistanês"
+    ],
+    [
+      "48",
+      "Outros Latino-americano"
+    ],
+    [
+      "49",
+      "Outros asiáticos"
+    ],
+    [
+      "50",
+      "Bangalês"
+    ],
+    [
+      "51",
+      "Outros Europeus"
+    ],
+    [
+      "60",
+      "Angolano"
+    ],
+    [
+      "61",
+      "Congolês"
+    ],
+    [
+      "62",
+      "Sul-Africano"
+    ],
+    [
+      "63",
+      "Ganês"
+    ],
+    [
+      "64",
+      "Senegalês"
+    ],
+    [
+      "70",
+      "Outros Africanos"
+    ],
+    [
+      "80",
+      "Outros"
+    ]
+  ],
+  "LCodPai": [
+    [
+      "1",
+      "Brasil"
+    ],
+    [
+      "2",
+      "Afeganistao"
+    ],
+    [
+      "3",
+      "Albania, Republica Da"
+    ],
+    [
+      "4",
+      "Alemanha"
+    ],
+    [
+      "5",
+      "Burkina Faso"
+    ],
+    [
+      "6",
+      "Andorra"
+    ],
+    [
+      "7",
+      "Angola"
+    ],
+    [
+      "8",
+      "Anguilla"
+    ],
+    [
+      "9",
+      "Antigua E Barbuda"
+    ],
+    [
+      "10",
+      "Antilhas Holandesas"
+    ],
+    [
+      "11",
+      "Arabia Saudita"
+    ],
+    [
+      "12",
+      "Argelia"
+    ],
+    [
+      "13",
+      "Argentina"
+    ],
+    [
+      "14",
+      "Armenia, Republica Da"
+    ],
+    [
+      "15",
+      "Aruba"
+    ],
+    [
+      "16",
+      "Australia"
+    ],
+    [
+      "17",
+      "Austria"
+    ],
+    [
+      "18",
+      "Azerbaijao, Republica Do"
+    ],
+    [
+      "19",
+      "Bahamas, Ilhas"
+    ],
+    [
+      "20",
+      "Bahrein, Ilhas"
+    ],
+    [
+      "21",
+      "Bangladesh"
+    ],
+    [
+      "22",
+      "Barbados"
+    ],
+    [
+      "23",
+      "Belarus, Republica Da"
+    ],
+    [
+      "24",
+      "Belgica"
+    ],
+    [
+      "25",
+      "Belize"
+    ],
+    [
+      "26",
+      "Bermudas"
+    ],
+    [
+      "27",
+      "Mianmar (BIRMANIA)"
+    ],
+    [
+      "28",
+      "Bolivia, Estado Plurinacional Da"
+    ],
+    [
+      "29",
+      "Bosnia-Herzegovina (REPUBLICA Da)"
+    ],
+    [
+      "30",
+      "Botsuana"
+    ],
+    [
+      "32",
+      "Brunei"
+    ],
+    [
+      "33",
+      "Bulgaria, Republica Da"
+    ],
+    [
+      "34",
+      "Burundi"
+    ],
+    [
+      "35",
+      "Butao"
+    ],
+    [
+      "36",
+      "Cabo Verde, Republica De"
+    ],
+    [
+      "37",
+      "Cayman, Ilhas"
+    ],
+    [
+      "38",
+      "Camboja"
+    ],
+    [
+      "39",
+      "Camaroes"
+    ],
+    [
+      "40",
+      "Canada"
+    ],
+    [
+      "41",
+      "Jersey, Ilha Do Canal"
+    ],
+    [
+      "42",
+      "Canarias, Ilhas"
+    ],
+    [
+      "43",
+      "Cazaquistao, Republica Do"
+    ],
+    [
+      "44",
+      "Catar"
+    ],
+    [
+      "45",
+      "Chile"
+    ],
+    [
+      "46",
+      "China, Republica Popular"
+    ],
+    [
+      "47",
+      "Formosa (TAIWAN)"
+    ],
+    [
+      "48",
+      "Chipre"
+    ],
+    [
+      "49",
+      "Cocos(Keeling),Ilhas"
+    ],
+    [
+      "50",
+      "Colombia"
+    ],
+    [
+      "51",
+      "Comores, Ilhas"
+    ],
+    [
+      "52",
+      "Congo"
+    ],
+    [
+      "53",
+      "Cook, Ilhas"
+    ],
+    [
+      "54",
+      "Coreia (DO Norte), Rep.Pop.Democratica"
+    ],
+    [
+      "55",
+      "Coreia (DO Sul), Republica Da"
+    ],
+    [
+      "56",
+      "Costa Do Marfim"
+    ],
+    [
+      "57",
+      "Croacia (REPUBLICA Da)"
+    ],
+    [
+      "58",
+      "Costa Rica"
+    ],
+    [
+      "59",
+      "Coveite"
+    ],
+    [
+      "60",
+      "Cuba"
+    ],
+    [
+      "61",
+      "Benin"
+    ],
+    [
+      "62",
+      "Dinamarca"
+    ],
+    [
+      "63",
+      "Dominica,Ilha"
+    ],
+    [
+      "64",
+      "Equador"
+    ],
+    [
+      "65",
+      "Egito"
+    ],
+    [
+      "66",
+      "Eritreia"
+    ],
+    [
+      "67",
+      "Emirados Arabes Unidos"
+    ],
+    [
+      "68",
+      "Espanha"
+    ],
+    [
+      "69",
+      "Eslovenia, Republica Da"
+    ],
+    [
+      "70",
+      "Eslovaca, Republica"
+    ],
+    [
+      "71",
+      "Estados Unidos"
+    ],
+    [
+      "72",
+      "Estonia, Republica Da"
+    ],
+    [
+      "73",
+      "Etiopia"
+    ],
+    [
+      "74",
+      "Falkland (ILHAS Malvinas)"
+    ],
+    [
+      "75",
+      "Feroe, Ilhas"
+    ],
+    [
+      "76",
+      "Filipinas"
+    ],
+    [
+      "77",
+      "Finlandia"
+    ],
+    [
+      "78",
+      "Franca"
+    ],
+    [
+      "79",
+      "Gabao"
+    ],
+    [
+      "80",
+      "Gambia"
+    ],
+    [
+      "81",
+      "Gana"
+    ],
+    [
+      "82",
+      "Georgia, Republica Da"
+    ],
+    [
+      "83",
+      "Gibraltar"
+    ],
+    [
+      "84",
+      "Granada"
+    ],
+    [
+      "85",
+      "Grecia"
+    ],
+    [
+      "86",
+      "Groenlandia"
+    ],
+    [
+      "87",
+      "Guadalupe"
+    ],
+    [
+      "88",
+      "Guam"
+    ],
+    [
+      "89",
+      "Guatemala"
+    ],
+    [
+      "90",
+      "Guiana Francesa"
+    ],
+    [
+      "91",
+      "Guine"
+    ],
+    [
+      "92",
+      "Guine-Equatorial"
+    ],
+    [
+      "93",
+      "Guine-Bissau"
+    ],
+    [
+      "94",
+      "Guiana"
+    ],
+    [
+      "95",
+      "Haiti"
+    ],
+    [
+      "96",
+      "Honduras"
+    ],
+    [
+      "97",
+      "Hong Kong"
+    ],
+    [
+      "98",
+      "Hungria, Republica Da"
+    ],
+    [
+      "99",
+      "Iemen"
+    ],
+    [
+      "100",
+      "Man, Ilha De"
+    ],
+    [
+      "101",
+      "India"
+    ],
+    [
+      "102",
+      "Indonesia"
+    ],
+    [
+      "103",
+      "Iraque"
+    ],
+    [
+      "104",
+      "Ira, Republica Islamica Do"
+    ],
+    [
+      "105",
+      "Irlanda"
+    ],
+    [
+      "106",
+      "Islandia"
+    ],
+    [
+      "107",
+      "Israel"
+    ],
+    [
+      "108",
+      "Italia"
+    ],
+    [
+      "109",
+      "Servia E Montenegro"
+    ],
+    [
+      "110",
+      "Jamaica"
+    ],
+    [
+      "111",
+      "Johnston, Ilhas"
+    ],
+    [
+      "112",
+      "Japao"
+    ],
+    [
+      "113",
+      "Jordania"
+    ],
+    [
+      "114",
+      "Kiribati"
+    ],
+    [
+      "115",
+      "Laos, Rep.Pop.Democr.Do"
+    ],
+    [
+      "116",
+      "Lebuan,Ilhas"
+    ],
+    [
+      "117",
+      "Lesoto"
+    ],
+    [
+      "118",
+      "Letonia, Republica Da"
+    ],
+    [
+      "119",
+      "Libano"
+    ],
+    [
+      "120",
+      "Liberia"
+    ],
+    [
+      "121",
+      "Libia"
+    ],
+    [
+      "122",
+      "Liechtenstein"
+    ],
+    [
+      "123",
+      "Lituania, Republica Da"
+    ],
+    [
+      "124",
+      "Luxemburgo"
+    ],
+    [
+      "125",
+      "Macau"
+    ],
+    [
+      "126",
+      "Macedonia, Ant.Rep.Iugoslava"
+    ],
+    [
+      "127",
+      "Madagascar"
+    ],
+    [
+      "128",
+      "Ilha Da Madeira"
+    ],
+    [
+      "129",
+      "Malasia"
+    ],
+    [
+      "130",
+      "Malavi"
+    ],
+    [
+      "131",
+      "Maldivas"
+    ],
+    [
+      "132",
+      "Mali"
+    ],
+    [
+      "133",
+      "Malta"
+    ],
+    [
+      "134",
+      "Marianas Do Norte"
+    ],
+    [
+      "135",
+      "Marrocos"
+    ],
+    [
+      "136",
+      "Marshall,Ilhas"
+    ],
+    [
+      "137",
+      "Martinica"
+    ],
+    [
+      "138",
+      "Mauricio"
+    ],
+    [
+      "139",
+      "Mauritania"
+    ],
+    [
+      "140",
+      "Midway, Ilhas"
+    ],
+    [
+      "141",
+      "Mexico"
+    ],
+    [
+      "142",
+      "Moldavia, Republica Da"
+    ],
+    [
+      "143",
+      "Monaco"
+    ],
+    [
+      "144",
+      "Mongolia"
+    ],
+    [
+      "145",
+      "Micronesia"
+    ],
+    [
+      "146",
+      "Montserrat,Ilhas"
+    ],
+    [
+      "147",
+      "Mocambique"
+    ],
+    [
+      "148",
+      "Namibia"
+    ],
+    [
+      "149",
+      "Nauru"
+    ],
+    [
+      "150",
+      "Christmas,Ilha (NAVIDAD)"
+    ],
+    [
+      "151",
+      "Nepal"
+    ],
+    [
+      "152",
+      "Nicaragua"
+    ],
+    [
+      "153",
+      "Niger"
+    ],
+    [
+      "154",
+      "Nigeria"
+    ],
+    [
+      "155",
+      "Niue,Ilha"
+    ],
+    [
+      "156",
+      "Norfolk,Ilha"
+    ],
+    [
+      "157",
+      "Noruega"
+    ],
+    [
+      "158",
+      "Nova Caledonia"
+    ],
+    [
+      "159",
+      "Papua Nova Guine"
+    ],
+    [
+      "160",
+      "Nova Zelandia"
+    ],
+    [
+      "161",
+      "Vanuatu"
+    ],
+    [
+      "162",
+      "Oma"
+    ],
+    [
+      "163",
+      "Pacifico,Ilhas Do (POSSESSAO Dos Eua)"
+    ],
+    [
+      "164",
+      "Paises Baixos (HOLANDA)"
+    ],
+    [
+      "165",
+      "Palau"
+    ],
+    [
+      "166",
+      "Paquistao"
+    ],
+    [
+      "167",
+      "Palestina"
+    ],
+    [
+      "168",
+      "Panama"
+    ],
+    [
+      "169",
+      "Paraguai"
+    ],
+    [
+      "170",
+      "Peru"
+    ],
+    [
+      "171",
+      "Pitcairn,Ilha"
+    ],
+    [
+      "172",
+      "Polinesia Francesa"
+    ],
+    [
+      "173",
+      "Polonia, Republica Da"
+    ],
+    [
+      "174",
+      "Portugal"
+    ],
+    [
+      "175",
+      "Porto Rico"
+    ],
+    [
+      "176",
+      "Quenia"
+    ],
+    [
+      "177",
+      "Quirguiz, Republica"
+    ],
+    [
+      "178",
+      "Reino Unido"
+    ],
+    [
+      "179",
+      "Republica Centro-Africana"
+    ],
+    [
+      "180",
+      "Republica Dominicana"
+    ],
+    [
+      "181",
+      "Reuniao, Ilha"
+    ],
+    [
+      "182",
+      "Zimbabue"
+    ],
+    [
+      "183",
+      "Romenia"
+    ],
+    [
+      "184",
+      "Ruanda"
+    ],
+    [
+      "185",
+      "Russia, Federacao Da"
+    ],
+    [
+      "186",
+      "Salomao, Ilhas"
+    ],
+    [
+      "187",
+      "Saint Kitts E Nevis"
+    ],
+    [
+      "188",
+      "Saara Ocidental"
+    ],
+    [
+      "189",
+      "El Salvador"
+    ],
+    [
+      "190",
+      "Samoa"
+    ],
+    [
+      "191",
+      "Samoa Americana"
+    ],
+    [
+      "192",
+      "Sao Cristovao E Neves,Ilhas"
+    ],
+    [
+      "193",
+      "San Marino"
+    ],
+    [
+      "194",
+      "Sao Pedro E Miquelon"
+    ],
+    [
+      "195",
+      "Sao Vicente E Granadinas"
+    ],
+    [
+      "196",
+      "Santa Helena"
+    ],
+    [
+      "197",
+      "Santa Lucia"
+    ],
+    [
+      "198",
+      "Sao Tome E Principe, Ilhas"
+    ],
+    [
+      "199",
+      "Senegal"
+    ],
+    [
+      "200",
+      "Seychelles"
+    ],
+    [
+      "201",
+      "Serra Leoa"
+    ],
+    [
+      "202",
+      "Cingapura"
+    ],
+    [
+      "203",
+      "Siria, Republica Arabe Da"
+    ],
+    [
+      "204",
+      "Somalia"
+    ],
+    [
+      "205",
+      "Sri Lanka"
+    ],
+    [
+      "206",
+      "Suazilandia"
+    ],
+    [
+      "207",
+      "Africa Do Sul"
+    ],
+    [
+      "208",
+      "Sudao"
+    ],
+    [
+      "209",
+      "Suecia"
+    ],
+    [
+      "210",
+      "Suica"
+    ],
+    [
+      "211",
+      "Suriname"
+    ],
+    [
+      "212",
+      "Tadjiquistao, Republica Do"
+    ],
+    [
+      "213",
+      "Tailandia"
+    ],
+    [
+      "214",
+      "Tanzania, Rep.Unida Da"
+    ],
+    [
+      "215",
+      "Territorio Brit.Oc.Indico"
+    ],
+    [
+      "216",
+      "Djibuti"
+    ],
+    [
+      "217",
+      "Chade"
+    ],
+    [
+      "218",
+      "Tcheca, Republica"
+    ],
+    [
+      "219",
+      "Timor Leste"
+    ],
+    [
+      "220",
+      "Togo"
+    ],
+    [
+      "221",
+      "Toquelau,Ilhas"
+    ],
+    [
+      "222",
+      "Tonga"
+    ],
+    [
+      "223",
+      "Trinidad E Tobago"
+    ],
+    [
+      "224",
+      "Tunisia"
+    ],
+    [
+      "225",
+      "Turcas E Caicos,Ilhas"
+    ],
+    [
+      "226",
+      "Turcomenistao, Republica Do"
+    ],
+    [
+      "227",
+      "Turquia"
+    ],
+    [
+      "228",
+      "Tuvalu"
+    ],
+    [
+      "229",
+      "Ucrania"
+    ],
+    [
+      "230",
+      "Uganda"
+    ],
+    [
+      "231",
+      "Uruguai"
+    ],
+    [
+      "232",
+      "Uzbequistao, Republica Do"
+    ],
+    [
+      "233",
+      "Vaticano, Est.Da Cidade Do"
+    ],
+    [
+      "234",
+      "Venezuela"
+    ],
+    [
+      "235",
+      "Vietna"
+    ],
+    [
+      "236",
+      "Virgens,Ilhas (BRITANICAS)"
+    ],
+    [
+      "237",
+      "Virgens,Ilhas (E.U.A.)"
+    ],
+    [
+      "238",
+      "Fiji"
+    ],
+    [
+      "239",
+      "Wake, Ilha"
+    ],
+    [
+      "240",
+      "Wallis E Futuna, Ilhas"
+    ],
+    [
+      "241",
+      "Congo, Republica Democratica Do"
+    ],
+    [
+      "242",
+      "Zambia"
+    ]
+  ]
+}

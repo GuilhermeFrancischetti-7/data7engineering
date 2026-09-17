@@ -1,0 +1,19 @@
+# Tema fixo e claro, de alto contraste.
+#
+# Sem isto o Streamlit segue o tema do sistema, e no claro o texto padrao
+# (#31333F sobre branco) fica lavado numa tela com muita tabela e legenda.
+# Aqui o texto e quase preto e o fundo secundario tem tom suficiente para
+# separar blocos sem depender de sombra.
+[theme]
+base = "light"
+backgroundColor = "#FFFFFF"
+secondaryBackgroundColor = "#E9EFF4"
+textColor = "#0E1621"
+primaryColor = "#0B5D63"
+font = "sans serif"
+
+[server]
+headless = true
+# Upload na nuvem: o padrao e 200 MB. O servidor gratuito tem ~1 GB de RAM,
+# entao passar muito disto derruba o app.
+maxUploadSize = 400

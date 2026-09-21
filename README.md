@@ -10,12 +10,13 @@
 > layouts of Senior HCM, for HR data migrations. The field mapping lives in a
 > spreadsheet, not in code; ambiguous values become explicit *pending items*
 > instead of plausible-but-wrong data. Tested on a real migration of ~650k XMLs
-> and ~8k employees. Ships with a synthetic data generator so anyone can run it.
+> and ~8k employees. Ships with a synthetic data generator so anyone can run it —
+> [live demo](https://extrator-esocial-senior-hcm.streamlit.app).
 
 <!-- Substitua pelo GIF da demo: docs/demo.gif -->
 <!-- ![demo](docs/demo.gif) -->
 
-**Demo online:** _em breve_ · **Autor:** [Guilherme Francischetti](https://www.linkedin.com/in/)
+**Demo online:** https://extrator-esocial-senior-hcm.streamlit.app · **Autor:** [Guilherme Francischetti](https://www.linkedin.com/in/)
 
 ---
 

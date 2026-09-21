@@ -16,7 +16,7 @@
 <!-- Substitua pelo GIF da demo: docs/demo.gif -->
 <!-- ![demo](docs/demo.gif) -->
 
-**Demo online:** https://extrator-esocial-senior-hcm.streamlit.app · **Autor:** [Guilherme Francischetti](https://www.linkedin.com/in/)
+**Demo online:** https://extrator-esocial-senior-hcm.streamlit.app · **Autor:** [Guilherme Francischetti](https://www.linkedin.com/in/guilhermefrancischetti)
 
 ---
 

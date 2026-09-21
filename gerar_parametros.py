@@ -52,7 +52,7 @@ COLUNAS = {
     "Máscara": "mascara",
     "DE/PARA": "depara_schema",
     "Obs. Senior": "obs_senior",
-    "Observações (Fonter)": "obs_fonter",
+    "Observações (Anterior)": "obs_anterior",
     "▶ Evento": "evento",
     "▶ Caminho no XML": "caminho",
     "▶ Regra / transformação": "regra",
@@ -76,21 +76,21 @@ def texto(v):
     return str(v).replace("\n", " ").strip()
 
 
-def classificar(tipo_depara, obs_fonter, regra, caminho):
+def classificar(tipo_depara, obs_anterior, regra, caminho):
     """Reduz as varias colunas a UMA acao que o writer sabe executar.
 
     Precedencia: a coluna '▶ Tipo De/Para' e a definicao aplicada e manda em
-    tudo. So quando ela delega ('conforme Fonter') e que a observacao Fonter
+    tudo. So quando ela delega ('conforme Anterior') e que a observacao Anterior
     decide. Nada aqui adivinha correspondencia de codigo -- quando falta
     definicao, devolve PENDENTE e o motivo vai para o relatorio.
     """
     t = (tipo_depara or "").strip().lower()
-    o = (obs_fonter or "").strip().lower()
+    o = (obs_anterior or "").strip().lower()
     r = (regra or "").strip()
 
     def valor_fixo():
         m = re.search(r'valor fixo\s*"?([^"]*)"?', r, re.I) or \
-            re.search(r'valor fixo\s*"?([^"]*)"?', obs_fonter or "", re.I)
+            re.search(r'valor fixo\s*"?([^"]*)"?', obs_anterior or "", re.I)
         return (m.group(1).strip() if m else "", bool(m))
 
     if t.startswith("de-para [cliente]"):
@@ -112,17 +112,17 @@ def classificar(tipo_depara, obs_fonter, regra, caminho):
     if t == "a definir":
         return "PENDENTE", "Marcado como 'a definir' na planilha de parametro."
 
-    # 'conforme Fonter' / 'sem De/Para (conforme Fonter)' -> a observacao Fonter decide.
-    if "conforme fonter" in t or t in ("", "—", "-"):
-        # Fonter descreve a numeracao em texto livre, sem marcar o tipo:
+    # 'conforme Anterior' / 'sem De/Para (conforme Anterior)' -> a observacao Anterior decide.
+    if "conforme anterior" in t or t in ("", "—", "-"):
+        # Anterior descreve a numeracao em texto livre, sem marcar o tipo:
         # "Numerar os dependentes..." / "linhas numeradas, sequenciadas...".
         if re.search(r"numerar|numerad|sequenciad", o, re.I):
-            return "SEQUENCIAL", (obs_fonter or "").strip()
+            return "SEQUENCIAL", (obs_anterior or "").strip()
         if "enviar vazio" in o:
             return "VAZIO", ""
         if "valor fixo" in o:
             v, ok = valor_fixo()
-            return ("FIXO", v) if ok else ("PENDENTE", "Fonter diz 'Valor Fixo' sem declarar a constante.")
+            return ("FIXO", v) if ok else ("PENDENTE", "Anterior diz 'Valor Fixo' sem declarar a constante.")
         if "fonte: relat" in o:
             return "RELATORIO", ""
         if "de-para [cliente]" in o:
@@ -130,7 +130,7 @@ def classificar(tipo_depara, obs_fonter, regra, caminho):
         if "de-para [geral]" in o:
             return "DEPARA_GERAL", ""
         if "de-para [tabela]" in o:
-            m = re.search(r"leiaute\s*(\d+)", obs_fonter, re.I)
+            m = re.search(r"leiaute\s*(\d+)", obs_anterior, re.I)
             return "DEPARA_TABELA", (m.group(1) if m else "")
         if caminho:
             return "DIRETO", ""
@@ -182,7 +182,7 @@ def main():
         for rotulo, chave in COLUNAS.items():
             if rotulo in cab:
                 idx[chave] = cab.index(rotulo)
-        # colunas de evento do Fonter: cabecalho no formato 'S-2200'
+        # colunas de evento do Anterior: cabecalho no formato 'S-2200'
         cols_evento = [j for j, h in enumerate(cab) if re.match(r"^S-\d{4}$", h)]
 
         # tabela do banco Senior, quando declarada no topo da aba
@@ -272,7 +272,7 @@ def main():
                 reg[chave] = texto(r[j]) if j < len(r) else ""
             reg["campo"] = nome_campo
 
-            # As colunas por evento do mapeamento Fonter (S-2200, S-2206, ...)
+            # As colunas por evento do mapeamento Anterior (S-2200, S-2206, ...)
             # trazem a tag do MESMO campo em cada evento. A coluna aplicada
             # guarda so um caminho; guardar as tags permite montar a linha a
             # partir de um evento diferente sem inventar caminho.
@@ -295,7 +295,7 @@ def main():
                               if e.strip()]
             reg["evento"] = reg["eventos"][0] if reg["eventos"] else ""
 
-            acao, arg = classificar(reg.get("tipo_depara"), reg.get("obs_fonter"),
+            acao, arg = classificar(reg.get("tipo_depara"), reg.get("obs_anterior"),
                                     reg.get("regra"), reg.get("caminho"))
             reg["acao"] = acao
             reg["arg"] = arg

@@ -1,6 +1,6 @@
 # Extrator eSocial → Senior HCM
 
-[![testes](https://github.com/GuilhermeFrancischetti-7/esocial-xml-extractor/actions/workflows/testes.yml/badge.svg)](https://github.com/GuilhermeFrancischetti-7/esocial-xml-extractor/actions/workflows/testes.yml)
+[![testes](https://github.com/GuilhermeFrancischetti-7/data7engineering/actions/workflows/testes.yml/badge.svg)](https://github.com/GuilhermeFrancischetti-7/data7engineering/actions/workflows/testes.yml)
 ![Python](https://img.shields.io/badge/python-3.12-blue)
 ![Streamlit](https://img.shields.io/badge/streamlit-1.61-red)
 ![Licença](https://img.shields.io/badge/licen%C3%A7a-MIT-green)

@@ -571,7 +571,7 @@ def _resolver(doc, campo, caminho, base, inst):
       1. caminho declarado, quando o evento e o mesmo;
       2. mesmo caminho relativo dentro do outro evento -- vale para os blocos
          que o eSocial repete igual entre eventos (ideEmpregador/nrInsc);
-      3. a tag que o Fonter mapeou para ESTE evento, localizada pelo nome
+      3. a tag que o Anterior mapeou para ESTE evento, localizada pelo nome
          dentro do no do evento; usada so como ultimo recurso e sempre
          registrada como pendencia, porque busca por nome de tag e o que
          tornava o programa legado fragil.
@@ -615,10 +615,10 @@ def _resolver(doc, campo, caminho, base, inst):
             return (alternativo.text or "").strip(), "caminho equivalente"
 
     # 3. a MESMA tag do caminho aplicado, achada em outro ponto deste evento.
-    #    Vem antes da tag do Fonter de proposito: o eSocial guarda o mesmo dado
+    #    Vem antes da tag do Anterior de proposito: o eSocial guarda o mesmo dado
     #    sob nomes de bloco diferentes (cpfTrab fica em trabalhador/ no S-2200 e
     #    em ideVinculo/ no S-2206). Preservar a tag aplicada mantem a coluna
-    #    coerente entre eventos -- trocar para a tag que o Fonter listou naquele
+    #    coerente entre eventos -- trocar para a tag que o Anterior listou naquele
     #    evento encheria a mesma coluna ora com CPF, ora com matricula.
     tag_aplicada = partes[-1] if partes else ""
     if tag_aplicada:
@@ -627,12 +627,12 @@ def _resolver(doc, campo, caminho, base, inst):
         if len(achados) == 1:
             return (achados[0].text or "").strip(), "tag aplicada"
 
-    # 4. ultimo recurso: a tag que o Fonter mapeou para ESTE evento
+    # 4. ultimo recurso: a tag que o Anterior mapeou para ESTE evento
     tag = (campo.get("tags_evento") or {}).get(doc.evento, "").strip()
     if tag and " " not in tag and tag != tag_aplicada:
         achados = [e for e in doc.no.iter() if e.tag == tag and (e.text or "").strip()]
         if len(achados) == 1:
-            return (achados[0].text or "").strip(), "tag Fonter"
+            return (achados[0].text or "").strip(), "tag Anterior"
 
     return "", None
 
@@ -951,7 +951,7 @@ def montar_modulo(codigo, parametros, documentos, tabelas, deduplicar=False):
                         bruto = dono.valor(caminho) or _tentar_operacao(dono, caminho)
                         if bruto:
                             estrategia = "empresa"
-                if estrategia in ("tag aplicada", "tag Fonter"):
+                if estrategia in ("tag aplicada", "tag Anterior"):
                     anotar(campo, "Campo mapeado no evento %s, montado a partir "
                                   "de um %s por %s. Caminho completo neste "
                                   "evento nao esta declarado na planilha. Conferir."

@@ -13,8 +13,7 @@
 > and ~8k employees. Ships with a synthetic data generator so anyone can run it —
 > [live demo](https://extrator-esocial-senior-hcm.streamlit.app).
 
-<!-- Substitua pelo GIF da demo: docs/demo.gif -->
-<!-- ![demo](docs/demo.gif) -->
+![Demonstração: dos XMLs do eSocial aos 48 layouts Senior](docs/demo.gif)
 
 **Demo online:** https://extrator-esocial-senior-hcm.streamlit.app · **Autor:** [Guilherme Francischetti](https://www.linkedin.com/in/guilhermefrancischetti)
 

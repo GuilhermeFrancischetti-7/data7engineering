@@ -42,6 +42,9 @@ Um app em Python/Streamlit que conduz a migração em seis etapas:
 5. carregar o De/Para preenchido;
 6. gerar os **48 layouts** Senior (561 campos) + relatório de pendências.
 
+Quem abre pela primeira vez não fica perdido: um guia de 9 passos e uma trilha de
+treino conduzem o caminho inteiro com dados fictícios.
+
 ```mermaid
 flowchart LR
     X[XMLs eSocial<br/>pasta · ZIP · lote] --> R[xml_reader<br/>localiza eventos,<br/>deduplica por Id]
@@ -98,8 +101,13 @@ python gerar_massa_demo.py    # cria exemplos/massa_demo com XMLs fictícios
 streamlit run app.py
 ```
 
-Na etapa 4, escolha **Pasta no disco** e informe `exemplos/massa_demo` — ou use o
-botão *Baixar massa de demonstração* e envie o ZIP por upload.
+O **Guia do App** abre sozinho na primeira tela: 9 passos com um GIF cada,
+gravados do app de verdade. No fim dele, o **treino guiado** acompanha o
+processo inteiro pela barra lateral, com a massa fictícia de `demo/xmls` — as
+tarefas se marcam sozinhas conforme você faz cada etapa na tela.
+
+Na etapa 4, escolha **Pasta no disco** e informe `demo/xmls` — ou baixe o ZIP
+pelo botão da trilha e envie por upload.
 
 ## Testes
 
@@ -110,22 +118,36 @@ python testes/validar_layouts.py       # relatório por layout
 python testes/teste_ui.py              # percorre a interface inteira sem navegador
 ```
 
-As invariantes: nenhum layout lança exceção, nenhuma linha duplicada, toda
-linha tem o número de campos do layout. Rodam no GitHub Actions a cada push.
+As invariantes: nenhum layout lança exceção, nenhuma linha duplicada, toda linha
+tem o número de campos do layout, e a massa de demonstração não carrega dado
+pessoal. Referência atual sobre `demo/xmls`: **48 layouts, 139 linhas, 0 erros**.
+Rodam no GitHub Actions a cada push.
 
-## Massa sintética
+## Massa fictícia e GIFs do guia
 
-`gerar_massa_demo.py` monta os XMLs **a partir dos próprios caminhos do
-`parametros.json`**: quando o mapeamento passa a usar uma tag nova, a massa de
-demo passa a contê-la sem alterar o gerador. CPFs e CNPJs têm dígito verificador
-válido e são aleatórios; os eventos de um mesmo colaborador são coerentes entre
-si (CPF, filial, cargo, dependentes, rubricas).
+Nada de dado real entra aqui. `testes/gerar_demo.py` escreve em `demo/xmls` os
+XMLs de uma empresa inventada — 8 pessoas, dois estabelecimentos, cargos,
+rubricas e folha —, com o mesmo envelope dos arquivos baixados do eSocial. São
+33 XMLs que exercitam os 48 layouts.
+
+`testes/gravar_guia.py` sobe um Streamlit numa porta própria, percorre a tela
+com Playwright usando essa massa e grava os GIFs de `demo/guia`. Os GIFs são o
+app real, não desenho, e o caminho que aparece neles é fictício — regrave quando
+a tela mudar:
+
+```bash
+pip install playwright && playwright install chromium
+python testes/gravar_guia.py
+```
+
+Um teste garante a regra: a massa versionada não pode conter CPF fora da faixa
+de exemplo.
 
 ## Estrutura
 
 | Arquivo | Papel |
 |---|---|
-| `app.py` | Interface Streamlit (6 etapas) |
+| `app.py` | Interface Streamlit: 6 etapas, guia e treino guiado |
 | `xml_reader.py` | Varre pasta/ZIP, identifica eventos, resolve caminhos, salva leituras |
 | `writer.py` | Monta as linhas de cada layout; regras nomeadas em `REGRAS_IMPLEMENTADAS` |
 | `depara.py` | Tabelas De/Para e precedência |
@@ -133,7 +155,9 @@ si (CPF, filial, cargo, dependentes, rubricas).
 | `complementar.py` | Planilha dos campos que o eSocial não tem e o cliente completa |
 | `gerar_parametros.py` | Planilha de parâmetro → `parametros.json` |
 | `gerar_dominios_esocial.py` | Tabelas de domínio oficiais do eSocial |
-| `gerar_massa_demo.py` | Massa de XMLs fictícia |
+| `testes/gerar_demo.py` | Gera a massa de XMLs fictícia de `demo/xmls` |
+| `testes/gravar_guia.py` | Grava os GIFs do guia percorrendo o app com Playwright |
+| `demo/` | Massa fictícia e GIFs do guia |
 | `parametro/` | Planilha de parâmetro (fonte da verdade do mapeamento) |
 | `testes/` | pytest, validação de layouts e teste de UI |
 

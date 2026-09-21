@@ -2,7 +2,7 @@
 r"""Exercita a interface de verdade (widgets, session_state, botoes) sem navegador.
 
 Uso:  py testes/teste_ui.py [pasta_com_xmls]
-Sem argumento, usa a variavel EXTRATOR_MASSA ou exemplos/massa_demo.
+Sem argumento, usa a variavel EXTRATOR_MASSA ou a massa ficticia em demo/xmls.
 Criterio de sucesso: 0 exceptions em todas as etapas e "OK" no final.
 """
 import io, os, sys
@@ -15,7 +15,7 @@ from streamlit.testing.v1 import AppTest
 
 PASTA = (sys.argv[1] if len(sys.argv) > 1 else
          os.environ.get("EXTRATOR_MASSA",
-                        os.path.join(P, "exemplos", "massa_demo")))
+                        os.path.join(P, "demo", "xmls")))
 
 
 def exceptions(at, etapa):
@@ -44,6 +44,9 @@ at = AppTest.from_file(os.path.join(P, "app.py"), default_timeout=900)
 at.run()
 at.selectbox[0].set_value("XML do eSocial").run()
 exceptions(at, "\n3) eSocial")
+
+# a etapa 3 comeca sem nenhum layout marcado (padrao pedido em 21/09)
+[c for c in at.checkbox if c.label == "Selecionar todos"][0].set_value(True).run()
 
 at.text_input[0].set_value(PASTA).run()
 exceptions(at, "\n4) pasta informada: " + PASTA)
@@ -78,6 +81,7 @@ ok = exceptions(at, "\n7) leitura salva") and ok
 at = AppTest.from_file(os.path.join(P, "app.py"), default_timeout=900)
 at.run()
 at.selectbox[0].set_value("XML do eSocial").run()
+[c for c in at.checkbox if c.label == "Selecionar todos"][0].set_value(True).run()
 at.radio[0].set_value("Leitura salva").run()
 at.text_input[0].set_value(arquivo).run()
 [b for b in at.button if "Carregar a leitura" in b.label][0].click().run()

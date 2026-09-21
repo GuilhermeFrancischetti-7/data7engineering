@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Invariantes do extrator sobre a massa sintetica (roda com pytest)."""
+"""Invariantes do extrator sobre a massa fictícia de `demo/xmls` (pytest)."""
 import collections
 import json
 import os
@@ -11,9 +11,11 @@ RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, RAIZ)
 
 import depara  # noqa: E402
-import gerar_massa_demo  # noqa: E402
+import gerar_demo  # noqa: E402  (testes/ está no sys.path do pytest)
 import writer  # noqa: E402
 import xml_reader  # noqa: E402
+
+MASSA = os.path.join(RAIZ, "demo", "xmls")
 
 
 @pytest.fixture(scope="session")
@@ -23,11 +25,12 @@ def parametros():
 
 
 @pytest.fixture(scope="session")
-def documentos(parametros, tmp_path_factory):
-    pasta = tmp_path_factory.mktemp("massa")
-    gerar_massa_demo.gerar(str(pasta), colaboradores=20, semente=7)
+def documentos(parametros):
+    # A massa é versionada; se faltar, é porque alguém apagou demo/xmls.
+    if not os.path.isdir(MASSA):
+        gerar_demo.gerar()
     docs, _, _, _ = xml_reader.carregar_documentos(parametros=parametros,
-                                                   pasta=str(pasta), recursivo=True)
+                                                   pasta=MASSA, recursivo=True)
     return docs
 
 
@@ -35,15 +38,20 @@ def test_parametro_cobre_48_layouts(parametros):
     assert len(parametros["modulos"]) == 48
 
 
-def test_todo_xml_gerado_e_reconhecido(documentos):
-    assert documentos
+def test_todo_xml_da_demo_e_reconhecido(documentos):
+    assert len(documentos) >= 30
     assert all(d.evento.startswith("S-") for d in documentos)
 
 
-def test_cpf_sintetico_tem_digito_valido():
-    import random
-    cpf = gerar_massa_demo.cpf(random.Random(1))
-    assert len(cpf) == 11 and cpf == cpf[:9] + gerar_massa_demo._dv(cpf[:9], range(10, 1, -1)) + cpf[10]
+def test_massa_de_demo_nao_tem_dado_de_cliente():
+    """A demo é fictícia por contrato: CPF real nunca entra no repositório."""
+    for raiz, _, arquivos in os.walk(MASSA):
+        for nome in arquivos:
+            texto = open(os.path.join(raiz, nome), encoding="utf-8").read()
+            # Os CPFs da demo são a faixa 100000000xx, reservada ao exemplo.
+            for marca in ("<cpfTrab>", "<cpfBenef>", "<cpfDep>"):
+                for pedaco in texto.split(marca)[1:]:
+                    assert pedaco[:3] == "100", pedaco[:11]
 
 
 def test_caminhos_alternativos():

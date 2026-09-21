@@ -1,12 +1,13 @@
-# Dados reais nunca entram no repositorio (LGPD). A massa de demo e sintetica.
+# Dados reais nunca entram no repositorio (LGPD). A massa de demo e ficticia.
 leituras/
 entregas/
+referencia/
 *.leitura
 *.zip
 ~$*
 .streamlit/secrets.toml
+.guia_visto.json
 .venv/
 __pycache__/
 *.pyc
 .pytest_cache/
-exemplos/massa_demo/

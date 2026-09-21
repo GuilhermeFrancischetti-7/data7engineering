@@ -8,7 +8,8 @@ Ex.:  py testes/validar_layouts.py
 Invariantes (o que foi exigido nas reunioes e nao pode regredir):
   - nenhum layout lanca excecao
   - nenhum layout tem duas linhas exatamente iguais
-Sem pasta, usa exemplos/massa_demo (gerada por gerar_massa_demo.py). Mudou o numero? Explique o porque antes de seguir.
+Sem pasta, usa demo/xmls (massa ficticia de testes/gerar_demo.py):
+48 layouts, 139 linhas, 0 erros, 0 duplicadas. Mudou o numero? Explique o porque antes de seguir.
 """
 import collections, io, json, os, sys
 
@@ -21,7 +22,7 @@ import depara, writer, xml_reader
 args = sys.argv[1:]
 pasta = (args.pop(0) if args and not args[0].isdigit() else
          os.environ.get("EXTRATOR_MASSA",
-                        os.path.join(P, "exemplos", "massa_demo")))
+                        os.path.join(P, "demo", "xmls")))
 PAR = json.load(open("parametros.json", encoding="utf-8"))
 alvo = args or sorted(PAR["modulos"])
 

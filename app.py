@@ -146,7 +146,239 @@ except FileNotFoundError:
 
 MODULOS = PAR["modulos"]
 
-st.title("Migração de Dados Senior")
+# ------------------------------------------------------------------- guia
+# Quem abre o app pela primeira vez nao sabe a ordem das etapas nem o que e o
+# De/Para. O guia abre sozinho a cada sessao nova e depois fica no botao ao lado
+# do titulo.
+#
+# Esta e a versao publica de demonstracao: aqui quase todo mundo e visitante de
+# primeira viagem, entao a marca de "ja vi" vale so para a sessao e nao vai para
+# o disco -- gravar em disco esconderia o guia de todo visitante seguinte, que e
+# justamente quem precisa dele.
+
+PASTA_GIFS = os.path.join(PASTA, "demo", "guia")
+
+# (titulo, texto, gif) -- o gif e gravado do app de verdade por
+# testes/gravar_guia.py, com a massa ficticia. Regrave quando a tela mudar.
+PASSOS_GUIA = [
+    ("O que este app faz",
+     "Ele lê os XMLs do eSocial e escreve os arquivos de importação do Senior HCM "
+     "(um .txt por layout), já com os códigos do cliente aplicados.",
+     None),
+    ("Etapa 1 — Tipo de migração",
+     "Escolha de onde vêm os dados. Só **XML do eSocial** tem extração automática; "
+     "nas outras origens o app entrega apenas a planilha de De/Para.",
+     "01-tipo.gif"),
+    ("Etapa 2 — Layouts preenchidos pelo cliente",
+     "É o caminho de **volta**: quando o cliente devolver o Excel de layouts "
+     "complementares (etapa 6), envie aqui e saem os .txt oficiais, sem precisar ler "
+     "os XMLs de novo.\n\n"
+     "Na primeira passagem, pule esta etapa.",
+     "02-preenchidos.gif"),
+    ("Etapa 3 — Layouts a gerar",
+     "Marque os layouts do Senior que você quer. Isso vem antes de ler os arquivos de "
+     "propósito: o app lê do disco só os eventos que esses layouts usam, e numa massa "
+     "grande isso é a diferença entre minutos e horas.\n\n"
+     "A linha *Precisa dos eventos* mostra o que será lido.",
+     "03-layouts.gif"),
+    ("Etapa 4 — Arquivos XML",
+     "**Pasta no disco** é o caminho normal: cole o caminho e clique em *Ler a pasta*. "
+     "Subpastas, .zip e zip dentro de zip entram junto.\n\n"
+     "Depois de ler, use **Salvar esta leitura**. O arquivo .leitura guarda os eventos "
+     "já lidos; dias depois você reabre em *Leitura salva* e não espera a leitura de "
+     "novo. Se o cliente mandar XMLs que faltavam, acrescente-os ali mesmo.",
+     "04-ler.gif"),
+    ("Etapa 5 — De/Para do cliente",
+     "De/Para é a tradução dos códigos: o eSocial diz `codCateg 101`, e o Senior espera "
+     "o código que **aquele cliente** usa.\n\n"
+     "O app monta a planilha com os códigos achados nos XMLs, o cliente preenche e você "
+     "devolve o arquivo no campo de envio. O que não for preenchido não é adivinhado: "
+     "sai o valor cru e entra no relatório de pendências.\n\n"
+     "Os **códigos do colaborador** (NUMCAD) vão numa planilha à parte, uma linha por "
+     "pessoa.",
+     "05-depara.gif"),
+    ("Etapa 6 — Gerar os layouts",
+     "Clique em *Gerar layouts Senior*. Saem os .txt no .zip, o relatório de pendências "
+     "e o diagnóstico.\n\n"
+     "Os arquivos saem **sem cabeçalho**, que é o que a importação do Senior espera. A "
+     "opção com cabeçalho serve só para conferir no Excel.",
+     "06-gerar.gif"),
+    ("Etapa 6 — Layouts complementares",
+     "Nem tudo existe no eSocial. O botão *Gerar layouts complementares* produz um Excel "
+     "com uma aba por layout: o que veio do eSocial já preenchido e, em **amarelo**, as "
+     "colunas que o cliente precisa completar. Em **laranja**, o obrigatório que deveria "
+     "ter vindo do XML e não veio.\n\n"
+     "Quando o cliente devolver esse Excel completo, envie-o na **etapa 2**.",
+     "07-complementar.gif"),
+    ("Antes de entregar ao cliente",
+     "Olhe as abas **Pendências** e **Diagnóstico**: elas dizem o que saiu vazio e por "
+     "quê. Campo vazio com pendência é de propósito — o app não preenche por semelhança."
+     "\n\n⚠️ Os XMLs e o arquivo .leitura têm dado pessoal (CPF, nome, salário). Não "
+     "tire da máquina sem combinar.",
+     "08-conferir.gif"),
+]
+
+
+def _guia_ja_visto():
+    return bool(st.session_state.get("guia_visto"))
+
+
+def _marcar_guia_visto():
+    st.session_state["guia_visto"] = True
+
+
+# O dialogo e redesenhado enquanto 'guia_aberto' estiver na sessao. Clicar num
+# botao dentro dele ja reexecuta o script; o que mantem a janela viva e a flag,
+# nao um st.rerun() -- rerun dentro do dialogo simplesmente o fecha, e era por
+# isso que o "Avancar" parecia nao fazer nada.
+def _passo_guia(delta):
+    st.session_state["passo_guia"] = min(
+        max(st.session_state.get("passo_guia", 0) + delta, 0), len(PASSOS_GUIA) - 1)
+
+
+@st.dialog("Guia do App", width="large")
+def _mostrar_guia():
+    # Navegacao por callback (on_click): o Streamlit roda o callback ANTES de
+    # redesenhar, entao o passo ja esta certo quando o texto e os botoes sao
+    # criados. Com st.rerun() a janela fechava -- era o bug do "Avancar" que
+    # nao fazia nada -- e lendo o clique no meio do script os botoes ficavam
+    # um passo atras.
+    i = st.session_state.get("passo_guia", 0)
+    ultimo = i + 1 == len(PASSOS_GUIA)
+    titulo, texto, gif = PASSOS_GUIA[i]
+    st.caption("Passo %d de %d" % (i + 1, len(PASSOS_GUIA)))
+    st.subheader(titulo)
+    st.markdown(texto)
+    caminho_gif = os.path.join(PASTA_GIFS, gif) if gif else None
+    if caminho_gif and os.path.exists(caminho_gif):
+        _e, _meio, _d = st.columns([1, 5, 1])   # so para centralizar
+        _meio.image(caminho_gif, width='stretch')
+    elif gif:
+        st.caption("(ilustração ainda não gravada — rode py testes/gravar_guia.py)")
+    st.progress((i + 1) / len(PASSOS_GUIA))
+    c1, c2, c3 = st.columns(3)
+    c1.button("Voltar", width='stretch', disabled=not i,
+              on_click=_passo_guia, args=(-1,), key="guia_voltar")
+    if not ultimo:
+        c2.button("Avançar", type="primary", width='stretch',
+                  on_click=_passo_guia, args=(1,), key="guia_avancar")
+    elif c2.button("Fazer o treino guiado", type="primary", width='stretch',
+                   key="guia_treino"):
+        st.session_state["treino"] = True
+        _fechar_guia()
+    if c3.button("Fechar", width='stretch', key="guia_fechar"):
+        _fechar_guia()
+
+
+def _fechar_guia():
+    _marcar_guia_visto()
+    st.session_state["guia_aberto"] = False
+    st.session_state["passo_guia"] = 0
+    st.rerun()
+
+
+_tit, _bot = st.columns([6, 1])
+with _tit:
+    st.title("Migração de Dados Senior")
+with _bot:
+    st.write("")
+    if st.button("Guia do App", help="Como usar o app, passo a passo",
+                 width='stretch'):
+        st.session_state["passo_guia"] = 0
+        st.session_state["guia_aberto"] = True
+
+# EXTRATOR_SEM_GUIA=1 desliga a abertura automatica: e o que testes/gravar_guia.py
+# usa para fotografar a tela sem a janela do guia por cima.
+if (not _guia_ja_visto() and "guia_aberto" not in st.session_state
+        and os.environ.get("EXTRATOR_SEM_GUIA") != "1"):
+    st.session_state["guia_aberto"] = True      # abre sozinho a cada sessao
+if st.session_state.get("guia_aberto"):
+    _mostrar_guia()
+
+# ---- trilha do treino -----------------------------------------------------
+# Ler o guia nao ensina; fazer, sim. A trilha acompanha a tela DE VERDADE: cada
+# tarefa e marcada quando o estado da sessao mostra que ela aconteceu, e a
+# pessoa usa o app normalmente, com a massa ficticia de demo/xmls.
+PASTA_DEMO = os.path.join(PASTA, "demo", "xmls")
+
+
+@st.cache_data(show_spinner=False)
+def _zip_da_demo():
+    """Os XMLs ficticios num zip, para quem usa o app de outra maquina."""
+    if not os.path.isdir(PASTA_DEMO):
+        return None
+    saida = io.BytesIO()
+    with zipfile.ZipFile(saida, "w", zipfile.ZIP_DEFLATED) as z:
+        for raiz, _, arquivos in os.walk(PASTA_DEMO):
+            for nome in arquivos:
+                inteiro = os.path.join(raiz, nome)
+                z.write(inteiro, os.path.relpath(inteiro, PASTA_DEMO))
+    return saida.getvalue()
+
+
+def _tarefas_treino():
+    e = st.session_state
+    massa = e.get("massa")
+    origem = e.get("origem_massa") or ("",)
+    leu_demo = bool(massa) and (
+        "demo" in str(origem[1]).lower() if len(origem) > 1 else False)
+    return [
+        ("Escolher o tipo de migração", e.get("sel_origem") == "XML do eSocial",
+         "Na etapa 1, escolha **XML do eSocial**."),
+        ("Marcar os layouts", bool(e.get("sel_layouts")),
+         "Na etapa 3, deixe **Selecionar todos** marcado (ou escolha alguns)."),
+        ("Ler a massa de demonstração", leu_demo,
+         "Baixe o .zip abaixo, descompacte numa pasta qualquer e cole o caminho "
+         "dessa pasta na etapa 4. Depois clique em **Ler a pasta**."),
+        ("Montar a planilha de De/Para", "modelo_depara" in e,
+         "Na etapa 5, baixe a planilha e abra: é ela que o cliente preenche."),
+        ("Gerar os layouts Senior", "resultados" in e,
+         "Na etapa 6, clique em **Gerar layouts Senior** e baixe o .zip."),
+        ("Gerar os layouts complementares", "complementar" in e,
+         "Ainda na etapa 6: o Excel com as colunas amarelas para o cliente."),
+        ("Voltar com o complementar preenchido", "oficiais" in e,
+         "Preencha uma coluna amarela, salve, e envie na **etapa 2**, "
+         "*Layouts preenchidos pelo cliente*."),
+    ]
+
+
+def _trilha_treino():
+    tarefas = _tarefas_treino()
+    feitas = sum(1 for _, ok, _ in tarefas if ok)
+    with st.sidebar:
+        st.subheader("Treino guiado")
+        st.caption("Faça o processo inteiro uma vez, com uma empresa fictícia. "
+                   "Nenhum dado real é usado.")
+        st.progress(feitas / len(tarefas), text="%d de %d" % (feitas, len(tarefas)))
+        proxima = next((t for t in tarefas if not t[1]), None)
+        for titulo, ok, _ in tarefas:
+            marca = "✅" if ok else ("➡️" if proxima and titulo == proxima[0] else "⬜")
+            st.write("%s %s" % (marca, titulo))
+        if proxima:
+            st.info("**Agora:** " + proxima[2])
+            if proxima[0] == "Ler a massa de demonstração":
+                _zip_demo = _zip_da_demo()
+                if _zip_demo:
+                    st.download_button("Baixar XMLs de demonstração (.zip)",
+                                       _zip_demo, file_name="XMLs_demonstracao.zip",
+                                       mime="application/zip", width='stretch')
+                    if not NUVEM:
+                        st.caption("Se preferir, use a pasta que já está nesta "
+                                   "máquina:")
+                        st.code(PASTA_DEMO, language=None)
+                else:
+                    st.warning("Massa de demonstração não encontrada. Rode:  "
+                               "py testes/gerar_demo.py")
+        else:
+            st.success("Trilha completa. Você já fez o caminho inteiro.")
+        if st.button("Sair do treino", width='stretch'):
+            st.session_state["treino"] = False
+            st.rerun()
+
+
+if st.session_state.get("treino"):
+    _trilha_treino()
+
 st.caption("Layout Senior HCM · Administração de Pessoal · %d layouts · %d campos "
            "· parâmetro %s (v%s)"
            % (len(MODULOS), sum(len(m["campos"]) for m in MODULOS.values()),
@@ -175,7 +407,7 @@ ORIGENS = {
 
 rotulo = st.selectbox(
     "De onde vêm os dados desta migração?",
-    options=list(ORIGENS), index=None,
+    options=list(ORIGENS), index=None, key="sel_origem",
     placeholder="Escolha o tipo de migração para começar",
     help="A extração automática só existe para o eSocial hoje. O De/Para é o "
          "mesmo arquivo nos três casos.")
@@ -222,8 +454,12 @@ if not ORIGENS[rotulo]["pronto"]:
 # Caminho de volta: o cliente devolve o xlsx de layouts complementares que o
 # proprio extrator gerou, completado, e daqui saem os TXT oficiais. Nao depende
 # de ler XML -- o que veio do eSocial ja esta nas linhas do arquivo.
-with st.expander("Já tenho os layouts complementares preenchidos — gerar os layouts oficiais do Senior"):
-    st.caption("Envie o arquivo gerado pelo botão **Gerar layouts complementares** "
+# Etapa propria, e nao um expander fechado no meio da tela: escondido assim,
+# ninguem achava o caminho de volta.
+st.header("2. Layouts preenchidos pelo cliente")
+with st.expander("Abrir — enviar o Excel preenchido e gerar os TXT oficiais",
+                 expanded=bool(st.session_state.get("oficiais"))):
+    st.caption("Só quando o cliente devolver o arquivo. Envie o Excel gerado pelo botão **Gerar layouts complementares** "
                "depois que o cliente completou. Cada aba vira o TXT do layout, "
                "com as colunas na ordem oficial. Não precisa ler os XMLs de novo.")
     _preenchido = st.file_uploader("Layouts complementares preenchidos (.xlsx)",
@@ -280,12 +516,19 @@ st.header("3. Layouts a gerar")
 
 col_a, col_b = st.columns([3, 1])
 with col_b:
-    marcar_todos = st.checkbox("Selecionar todos", value=True)
+    # Com 'key', o Streamlit ignora o 'default' nas passadas seguintes: quem
+    # manda e o valor na sessao. Por isso o "Selecionar todos" escreve a lista
+    # inteira pelo on_change -- antes a etapa 3 ficava travada com os 48.
+    def _marcar_todos():
+        st.session_state["sel_layouts"] = (sorted(MODULOS)
+                                           if st.session_state["chk_todos"] else [])
+
+    st.checkbox("Selecionar todos", value=False, key="chk_todos",
+                on_change=_marcar_todos)
 with col_a:
+    st.session_state.setdefault("sel_layouts", [])
     escolhidos = st.multiselect(
-        "Layouts",
-        options=sorted(MODULOS),
-        default=sorted(MODULOS) if marcar_todos else [],
+        "Layouts", options=sorted(MODULOS), key="sel_layouts",
         format_func=lambda c: "%s — %s" % (c, MODULOS[c]["nome"]))
 
 if not escolhidos:
@@ -308,27 +551,6 @@ st.caption("Precisa dos eventos: %s" % (", ".join(sorted(EVENTOS_NECESSARIOS))
 # ---------------------------------------------------------------- 1. arquivos
 st.header("4. Arquivos XML")
 
-
-@st.cache_data(show_spinner=False)
-def _zip_massa_demo():
-    """Massa sintetica (gerar_massa_demo.py) zipada, para testar sem dado real."""
-    import tempfile
-    import gerar_massa_demo
-    with tempfile.TemporaryDirectory() as tmp:
-        arquivos = gerar_massa_demo.gerar(tmp)
-        buf = io.BytesIO()
-        with zipfile.ZipFile(buf, "w", zipfile.ZIP_DEFLATED) as z:
-            for a in arquivos:
-                z.write(a, os.path.relpath(a, tmp))
-    return buf.getvalue()
-
-
-with st.expander("Não tem XMLs à mão? Baixe uma massa de demonstração"):
-    st.caption("XMLs 100% fictícios, com CPFs e CNPJs gerados. Baixe o ZIP e "
-               "envie em \"Upload de arquivos\" logo abaixo.")
-    st.download_button("Baixar massa_demo.zip", _zip_massa_demo(),
-                       file_name="massa_demo.zip", mime="application/zip")
-
 modo = st.radio(
     "De onde vem a massa",
     (["Upload de arquivos", "Leitura salva"] if NUVEM else
@@ -347,8 +569,7 @@ if modo.startswith("Pasta"):
     caminho = st.text_input(
         "Caminho da pasta",
         value=st.session_state.get("ultima_pasta", ""),
-        placeholder=r"C:\Users\%s\Downloads\xmls_esocial"
-                    % os.environ.get("USERNAME", "usuario"),
+        placeholder=r"D:\Migracao\XMLs_eSocial",
         help="Cole o caminho da pasta. Subpastas entram junto. "
              "Aceita .xml e .zip; ZIP com subpastas e ZIP dentro de ZIP tambem.")
     recursivo = st.checkbox("Incluir subpastas", value=True)
@@ -439,7 +660,7 @@ elif modo == "Leitura salva":
     arquivo_leitura = st.text_input(
         "Caminho do arquivo .leitura",
         value=st.session_state.get("ultima_leitura", ""),
-        placeholder=os.path.join(PASTA_LEITURAS, "minha_massa.leitura"),
+        placeholder=r"D:\Migracao\leitura_do_cliente.leitura",
         help="Arquivo gravado com o botao 'Salvar esta leitura', depois de ler "
              "uma pasta.")
     origem_atual = ("leitura", arquivo_leitura.strip()) if arquivo_leitura.strip() else None
@@ -775,6 +996,7 @@ with cd2:
     if preenchido:
         qtd, avisos = tabelas.carregar_modelo(preenchido.getvalue())
         if qtd:
+            st.session_state["depara_carregado"] = qtd
             st.success("%d traducoes carregadas." % qtd)
         for a in avisos:
             st.warning(a)

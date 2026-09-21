@@ -26,6 +26,7 @@ O arquivo final sai SEM cabecalho, so as linhas de dados, campos separados por
 import re
 from datetime import datetime
 
+import depara
 from depara import _no_repeticao
 from xml_reader import alternativas
 
@@ -70,6 +71,26 @@ def formatar(valor, campo):
     if (re.match(r"^\d{4}-\d{2}$", valor) and "data" in tipo
             and (campo.get("mascara") or "").upper() == "MM/YYYY"):
         return "%s/%s" % (valor[5:7], valor[:4])
+
+    # Mascara com virgula ('ZZZZZZZZ9,99', 'Z9,99') = casas decimais exigidas.
+    # Decidir pela mascara, e nao pelo tipo: os 44 campos decimais do layout
+    # sao todos tipo 'Numero', entao o ramo por tipo nunca rodava e o valor saia
+    # como vem do XML ('1200.00', '20'). O migrador conta as casas depois da
+    # virgula, e VALSAL/VALEVE/REFEVE/DIAFER/QTDAFA/VALBOL eram recusados.
+    # So mascara que TERMINA em virgula + placeholders de digito ('ZZZ9,99').
+    # A mascara do CEP e '#N(8,0)[EDICEP]#': tem virgula, nao e decimal. Contar
+    # tudo depois da virgula fazia o CEP sair como '1,00000000000'.
+    mascara = (campo.get("mascara") or "")
+    casas_decimais = re.search(r",([9Z#]+)$", mascara.strip())
+    if casas_decimais:
+        casas = len(casas_decimais.group(1))
+        cru = valor.strip().replace(" ", "")
+        if "," in cru:                      # 5.231,25 -> ponto e separador de milhar
+            cru = cru.replace(".", "").replace(",", ".")
+        try:
+            return ("%.*f" % (casas, float(cru))).replace(".", ",")
+        except ValueError:
+            return valor                    # nao e numero: sai cru e vira pendencia
 
     if "valor" in tipo or "decimal" in tipo:
         try:
@@ -200,6 +221,17 @@ def indice_estabelecimentos(documentos):
 
 def _regra_truncar_40(valor, campo, ctx):
     return valor[:40]
+
+
+def _regra_socio_do_sindicato(valor, campo, ctx):
+    """Presenca de filiacaoSindical -> S (planilha do 1020 SOCSIN).
+
+    A planilha declara so o lado do "S". O "N" na ausencia e DERIVADO: o campo
+    tem lista S/N e o eSocial nao transmite "nao e sindicalizado" de outra
+    forma. Se a leitura certa for deixar vazio quando nao ha filiacao, e trocar
+    o else por "".
+    """
+    return "S" if (valor or "").strip() else "N"
 
 
 def _regra_data_pagamento_s1210(valor, campo, ctx):
@@ -434,6 +466,10 @@ def _regra_cep_mais_frequente(valor, campo, ctx):
 
 REGRAS_IMPLEMENTADAS = {
     "truncar em 40 caracteres": _regra_truncar_40,
+    # O apelido nao existe no eSocial: a planilha manda derivar da razao social,
+    # e o campo tem mascara A[40]. Mesma implementacao do truncar em 40.
+    "não existe apelido no esocial: derivar de nmrazao": _regra_truncar_40,
+    "presença de filiacaosindical -> s": _regra_socio_do_sindicato,
     "dtprojfimapi - dtdeslig = dias de aviso indenizado": _regra_dias_aviso_indenizado,
     "data de pagamento do s-1210, associado pelo idedmdev": _regra_data_pagamento_s1210,
     "desmembrar o telefone; ddi fixo 055": _regra_ddi,
@@ -459,8 +495,13 @@ def _aplicar_regra(texto_regra, valor, campo, ctx):
     m = re.match(r'valor fixo\s*"?([^"]*)"?$', chave, re.I)
     if m:
         return m.group(1), None
-    return valor, ("Regra nao implementada: \"%s\". Valor cru mantido."
-                   % (texto_regra or "").strip())
+    # Regra sem implementacao sai VAZIA, nao com o valor cru: o campo espera o
+    # resultado da regra, e o valor de entrada quase nunca cabe nele. O QTDAFA
+    # do 1032 ("somar os dias de afastamento") saia com a data do dtIniAfast
+    # ('2019-10-08') num campo decimal de 4 digitos. Coluna vazia com pendencia
+    # e melhor que dado plausivel e errado.
+    return "", ("Regra nao implementada: \"%s\". Coluna vazia."
+                % (texto_regra or "").strip())
 
 
 _MAPA_RAIZ = {}
@@ -822,6 +863,7 @@ def montar_modulo(codigo, parametros, documentos, tabelas, deduplicar=False):
                             # linha a partir de um evento vizinho.
                             natural, _ = _resolver(doc, campo, natural_de,
                                                    base, inst)
+                        natural = canonica(codigo, natural, parametros, documentos)
                         tabela_seq = tabela_sequencial(codigo, nome, parametros,
                                                        documentos)
                         if not natural:
@@ -982,6 +1024,7 @@ def montar_modulo(codigo, parametros, documentos, tabelas, deduplicar=False):
                     tabela_seq = tabela_sequencial(campo["arg"], nome,
                                                    parametros, documentos)
                     if tabela_seq:
+                        bruto = canonica(campo["arg"], bruto, parametros, documentos)
                         if bruto in tabela_seq:
                             linha.append(formatar(tabela_seq[bruto], campo))
                         else:
@@ -992,7 +1035,18 @@ def montar_modulo(codigo, parametros, documentos, tabelas, deduplicar=False):
                         continue
 
                 if acao in ("DEPARA_GERAL", "DEPARA_CLIENTE", "DEPARA_TABELA"):
-                    traduzido, origem, aviso = tabelas.traduzir(codigo, nome, bruto)
+                    # 'De-Para [cliente] - como <CAMPO>': consulta a tabela de
+                    # outro campo. O CADATU e o FICREG do 1021 sao o codigo do
+                    # colaborador (o mesmo NUMCAD) e saiam com o CPF de 11
+                    # digitos num campo de 9.
+                    alvo = (campo.get("arg") if acao == "DEPARA_CLIENTE" else "") or nome
+                    if campo.get("por_caminho"):
+                        # a tabela e a da TAG lida, nao a do campo Senior: o
+                        # mesmo numero significa coisas diferentes na tag
+                        # antiga e na nova (VISEST classTrabEstrang x condIng)
+                        alvo = depara.nome_depara(
+                            campo, caminho_que_casou(doc, campo, caminho, base, inst))
+                    traduzido, origem, aviso = tabelas.traduzir(codigo, alvo, bruto)
                     linha.append(formatar(traduzido, campo))
                     if aviso:
                         anotar(campo, aviso, bruto)
@@ -1120,6 +1174,25 @@ def _deduplicar_por_chave(linhas, campos):
     return list(vistos.values()) + soltas
 
 
+def caminho_que_casou(doc, campo, caminho, base, inst):
+    """Qual alternativa declarada trouxe o valor neste documento.
+
+    So interessa ao 'De-Para [geral] - por caminho', que escolhe a tabela pela
+    TAG lida. Repete a selecao do _resolver em vez de mudar o retorno dele: as
+    tres chamadas do _resolver nao precisam saber disso, e o custo e reler o
+    mesmo no.
+    """
+    for alt in alternativas(caminho):
+        if _raiz_do_evento(alt) not in (doc.evento, None, ""):
+            continue
+        valor = (doc.valor_em(alt, base, inst)
+                 if base and alt.startswith(base + "/") and inst is not None
+                 else doc.valor(alt))
+        if valor:
+            return alt
+    return ""
+
+
 def _alternativas_do_evento(campo, evento, parametros):
     """Alternativas declaradas no campo que pertencem a ESTE evento."""
     import xml_reader as _xr
@@ -1171,6 +1244,66 @@ def instancia_valida(base, caminho, inst):
 
 
 _CACHE_SEQ = {}
+
+
+_CACHE_EQUIV = {}
+
+
+def equivalencias(codigo, parametros, documentos):
+    """{chave de origem -> chave de destino} do '◆ Equivalencia de chave' do leiaute.
+
+    O mesmo cargo aparece com duas chaves: pelo codCargo no S-1030 e so por
+    nmCargo+CBOCargo no S-2200/S-2206 do eSocial simplificado. Na cliente piloto, 114 dos
+    386 cargos do simplificado ja estavam no S-1030 e ganhavam um segundo numero.
+    A planilha declara 'origem -> destino' com caminhos do mesmo evento (o
+    S-1030 tem nome, CBO e codigo); aqui se monta, dos documentos desse evento,
+    o valor da origem -> o valor do destino.
+
+    Origem com mais de um destino (o mesmo nome+CBO em dois codCargo) fica FORA:
+    escolher um seria palpite, e a linha segue com a propria chave.
+    Devolve (mapa, ambiguos).
+    """
+    chave = (codigo, id(documentos))
+    if chave in _CACHE_EQUIV:
+        return _CACHE_EQUIV[chave]
+    import xml_reader as _xr
+    regras = ((parametros.get("modulos") or {}).get(codigo) or {}).get("equivalencia") or []
+    if not regras:
+        _CACHE_EQUIV[chave] = ({}, {})
+        return _CACHE_EQUIV[chave]
+    mapa_raiz = _xr.mapa_tag_evento(parametros)
+
+    def variantes(caminho):
+        # inclusao/alteracao sao intercambiaveis, como no resto da planilha
+        out = [caminho]
+        for a, b in (("/inclusao/", "/alteracao/"), ("/alteracao/", "/inclusao/")):
+            if a in caminho:
+                out.append(caminho.replace(a, b))
+        return out
+
+    destinos = {}
+    for origem, destino in regras:
+        evento = mapa_raiz.get(destino.split("/")[0])
+        for doc in documentos:
+            if evento and doc.evento != evento:
+                continue
+            o = d = ""
+            for vo, vd in zip(*[variantes(c) for c in (origem, destino)]):
+                o = o or _valor_de_alternativa(doc, vo, None, None)
+                d = d or doc.valor(vd)
+            if o and d:
+                destinos.setdefault(o, set()).add(d)
+    mapa = {o: next(iter(ds)) for o, ds in destinos.items() if len(ds) == 1}
+    ambiguos = {o: sorted(ds) for o, ds in destinos.items() if len(ds) > 1}
+    _CACHE_EQUIV[chave] = (mapa, ambiguos)
+    return _CACHE_EQUIV[chave]
+
+
+def canonica(codigo, valor, parametros, documentos):
+    """A chave que vale para 'valor' no leiaute 'codigo' (ela mesma, sem equivalencia)."""
+    if not valor:
+        return valor
+    return equivalencias(codigo, parametros, documentos)[0].get(valor, valor)
 
 
 def tabela_sequencial(codigo, nome_campo, parametros, documentos):
@@ -1225,11 +1358,22 @@ def tabela_sequencial(codigo, nome_campo, parametros, documentos):
         for doc in por_evento[evento]:
             base, instancias = _no_repeticao(doc, mod, evento)
             for inst in (instancias if (base and instancias) else [None]):
-                v = chave_natural(doc, proprios, base, inst)
+                v = canonica(codigo, chave_natural(doc, proprios, base, inst),
+                             parametros, documentos)
                 if v:
                     valores.add(v)
 
-    tabela = {v: str(n) for n, v in enumerate(sorted(valores), start=1)}
+    if nome_campo in (mod or {}).get("numerar_por_grupo", []):
+        # Recomeca em 1 a cada valor da primeira parte da chave ('codMunic+bairro'
+        # -> por cidade). Chave sem a segunda parte (bairro em branco) nao e
+        # numerada: viraria um "bairro" com o codigo da cidade.
+        tabela, grupos = {}, {}
+        for v in sorted(x for x in valores if "+" in x):
+            grupo = v.split("+", 1)[0]
+            grupos[grupo] = grupos.get(grupo, 0) + 1
+            tabela[v] = str(grupos[grupo])
+    else:
+        tabela = {v: str(n) for n, v in enumerate(sorted(valores), start=1)}
     _CACHE_SEQ.clear()
     _CACHE_SEQ[chave] = tabela
     return tabela

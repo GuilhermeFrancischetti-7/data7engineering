@@ -209,12 +209,19 @@ def levantar_colaboradores(documentos):
 
 
 def carregar_codigos_colaborador(dados_xlsx):
-    """Le o arquivo de codigos devolvido pelo cliente -> {cpf: codigo Senior}.
+    """Le o arquivo de codigos devolvido pelo cliente -> {chave: codigo Senior}.
 
     Localiza as colunas pelo cabecalho, nao pela posicao: o cliente pode
     reordenar, e um arquivo que ele mesmo montou raramente vem na ordem exata.
     Devolve tambem o que NAO foi possivel usar, para a tela mostrar em vez de
     ignorar em silencio.
+
+    A chave e o CPF **e** a matricula do eSocial, quando o arquivo traz as duas
+    colunas: o NUMCAD nem sempre sai do cpfTrab. No 1018, 1020, 1028, 1036 e
+    1037 o caminho e 'ideVinculo/matricula', e com tabela so por CPF esses
+    cinco leiautes saiam com a matricula crua ('MC000618425') num campo
+    numerico de 9 digitos. E a mesma pessoa e o mesmo codigo, so muda por onde
+    o evento a identifica.
     """
     import openpyxl
     wb = openpyxl.load_workbook(io.BytesIO(dados_xlsx), read_only=True,
@@ -245,15 +252,23 @@ def carregar_codigos_colaborador(dados_xlsx):
             problemas.append("Aba '%s': achei a coluna do CPF, mas nenhuma "
                              "coluna de codigo do colaborador." % ws.title)
             continue
+        c_mat = next((j for j, x in enumerate(curto) if "matr" in x), None)
         for r in linhas[hi + 1:]:
             if not r or c_cpf >= len(r) or r[c_cpf] is None:
                 continue
             cpf = str(r[c_cpf]).strip().split(".")[0]
             cpf = "".join(ch for ch in cpf if ch.isdigit()).zfill(11)
             codigo = str(r[c_cod]).strip() if c_cod < len(r) and r[c_cod] is not None else ""
-            if len(cpf) != 11 or not codigo:
+            if not codigo:
                 continue
-            tabela[cpf] = codigo
+            if len(cpf) == 11:
+                tabela[cpf] = codigo
+            if c_mat is not None and c_mat < len(r) and r[c_mat] is not None:
+                matricula = str(r[c_mat]).strip().split(".")[0]
+                # Matricula em branco e comum (quem nunca teve evento com ela).
+                # Nao sobrepoe uma chave ja lida: a primeira linha vale, como no CPF.
+                if matricula and matricula not in tabela:
+                    tabela[matricula] = codigo
     wb.close()
     return tabela, problemas
 
@@ -375,25 +390,47 @@ def levantar_valores_distintos(documentos, parametros, modulos_alvo):
                         if base and instancias and caminho.startswith(base):
                             for inst in instancias:
                                 _somar(achados, cod, campo,
-                                       doc.valor_em(caminho, base, inst), documentos)
+                                       doc.valor_em(caminho, base, inst), documentos,
+                                       nome_depara(campo, caminho))
                         else:
-                            _somar(achados, cod, campo, doc.valor(caminho), documentos)
+                            _somar(achados, cod, campo, doc.valor(caminho), documentos,
+                                   nome_depara(campo, caminho))
     return achados
 
 
-def _somar(achados, cod, campo, valor, documentos=None):
+def nome_depara(campo, caminho=""):
+    """Nome da tabela De/Para deste campo.
+
+    Em regra e o proprio campo Senior: uma pergunta por campo, valendo para
+    todos os leiautes. Com 'De-Para [geral] - por caminho' e a TAG lida.
+
+    O eSocial renomeou tags na virada para o S-1.3 e os dominios antigo e novo
+    usam os MESMOS numeros com significados diferentes -- no VISEST,
+    classTrabEstrang 2 e "Visto temporario" e condIng 2 e "Solicitante de
+    refugio". Com uma tabela so, as duas respostas viravam uma e o codigo do
+    XML antigo era traduzido pela resposta dada ao novo. A aba do cliente passa
+    a ser 'De-Para <tag>'.
+    """
+    if not campo.get("por_caminho") or not caminho:
+        return campo["campo"]
+    tag = caminho.split("|")[0].split("+")[0].strip().split("/")[-1]
+    return tag or campo["campo"]
+
+
+def _somar(achados, cod, campo, valor, documentos=None, nome=None):
     if valor == "":
         return
+    nome = nome or campo["campo"]
     if campo["campo"] == "NUMEMP" and len(valor) == 8 and valor.isdigit() and documentos:
         # Mesma conversao do writer: a raiz de 8 (1000, 1001, 1002 leem o
         # ideEmpregador) vira a matriz de 14 achada nos S-1005. Sem isso o
         # cliente recebia a raiz para mapear, valor que a exportacao nunca usa.
         import writer
         valor = writer.matriz_da_massa(documentos).get(valor, valor)
-    chave = (cod, campo["campo"], valor)
+    chave = (cod, nome, valor)
     if chave not in achados:
         achados[chave] = {
-            "layout": cod, "campo": campo["campo"],
+            "layout": cod, "campo": nome,
             "descricao": campo.get("descricao", ""),
             "tipo": campo.get("tipo_depara", ""),
             "valor": valor, "qtd": 0,

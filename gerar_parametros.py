@@ -94,7 +94,11 @@ def classificar(tipo_depara, obs_anterior, regra, caminho):
         return (m.group(1).strip() if m else "", bool(m))
 
     if t.startswith("de-para [cliente]"):
-        return "DEPARA_CLIENTE", ""
+        # 'De-Para [cliente] - como NUMCAD': o campo consulta a tabela de OUTRO
+        # campo. O CADATU e o FICREG do 1021 sao o codigo do colaborador, o
+        # mesmo do NUMCAD, e a tabela do cliente esta gravada sob NUMCAD.
+        m = re.search(r"como\s+([A-Z][A-Z0-9]{2,})", tipo_depara or "", re.I)
+        return "DEPARA_CLIENTE", (m.group(1).upper() if m else "")
     if t.startswith("de-para [geral]"):
         return "DEPARA_GERAL", ""
     if t.startswith("de-para [tabela]"):
@@ -259,6 +263,32 @@ def main():
                         filtro.append([cam.strip(), val.strip()])
                 break
 
+        # '◆ Equivalencia de chave: origem -> destino | ...' -- a mesma coisa
+        # identificada por duas chaves. O cargo do eSocial simplificado vem so
+        # com nmCargo+CBOCargo, e o mesmo cargo pode estar no S-1030 pelo
+        # codCargo: sem isto ganhava dois numeros no 1004. O destino e a chave
+        # que vale; a origem e lida nos documentos do evento do destino.
+        # '◆ Numerar por grupo: CAMPO | ...' -- o sequencial de identidade desses
+        # campos recomeca em 1 a cada valor da PRIMEIRA parte da chave composta.
+        # O CODBAI do 1011 e numerado por cidade (chave codMunic+bairro), como o
+        # consultor pediu, e continua sendo identidade: o 1013 acha o mesmo numero.
+        numerar_por_grupo = []
+        for r in linhas[:hi]:
+            if r and texto(r[0]).lower().lstrip("◆ ").startswith("numerar por grupo"):
+                numerar_por_grupo = [c.strip() for c in (texto(r[1]) if len(r) > 1 else "").split("|")
+                                     if c.strip()]
+                break
+
+        equivalencia = []
+        for r in linhas[:hi]:
+            if r and texto(r[0]).lower().lstrip("◆ ").startswith(("equivalência de chave",
+                                                                  "equivalencia de chave")):
+                for parte in (texto(r[1]) if len(r) > 1 else "").split("|"):
+                    if "->" in parte:
+                        de, para = parte.split("->", 1)
+                        equivalencia.append([de.strip(), para.strip()])
+                break
+
         campos = []
         for r in linhas[hi + 1:]:
             if not r or not r[0]:
@@ -305,6 +335,16 @@ def main():
             # admissao da mesma pessoa tem).
             m = re.search(r"\bpor\s+(\w+)\s*$", reg.get("tipo_depara", ""))
             reg["juncao"] = m.group(1) if acao == "DEPARA_TABELA" and m else ""
+            # 'De-Para [geral] - por caminho': a tabela De/Para e escolhida pela
+            # TAG lida, e nao pelo nome do campo Senior. O eSocial renomeou tags
+            # na virada para o S-1.3 e os dois dominios usam os MESMOS numeros
+            # com significados diferentes (VISEST: classTrabEstrang 2 = Visto
+            # temporario, condIng 2 = Solicitante de refugio). Uma tabela por tag
+            # evita que as duas respostas virem uma so.
+            reg["por_caminho"] = bool(
+                acao in ("DEPARA_GERAL", "DEPARA_CLIENTE")
+                and re.search(r"\bpor\s+caminho\s*$",
+                              reg.get("tipo_depara", ""), re.I))
             reg["obrigatorio"] = reg.get("obrigatorio", "").lower().startswith("sim")
             reg["chave"] = reg.get("chave", "").lower().startswith("sim")
             campos.append(reg)
@@ -316,6 +356,8 @@ def main():
                                "exige_bloco": exige_bloco,
                                "eventos_linha": eventos_linha,
                                "filtro": filtro,
+                               "equivalencia": equivalencia,
+                               "numerar_por_grupo": numerar_por_grupo,
                                "linhas_fixas": linhas_fixas, "campos": campos}
 
     # ---- mascara a mostrar na planilha de De/Para ----

@@ -11,8 +11,7 @@ jobs:
         with:
           python-version: "3.12"
       - run: pip install -r requirements.txt pytest
-      - run: pytest -q testes/test_extrator.py
-      - name: Layouts sobre a massa de demo
-        run: |
-          python gerar_massa_demo.py
-          python testes/validar_layouts.py
+      - name: Invariantes dos 48 layouts
+        run: pytest -q testes/test_extrator.py
+      - name: Relatorio layout a layout sobre a massa de demonstracao
+        run: python testes/validar_layouts.py

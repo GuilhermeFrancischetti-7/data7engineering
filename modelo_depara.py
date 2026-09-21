@@ -75,16 +75,18 @@ TEMAS = [
 # Vao para uma aba separada, com a pergunta na direcao natural deles.
 ABA_EMPRESA = "8. Codigos da empresa"
 
-# A fronteira entre dominio, que o cliente mapeia a mao, e identificador, que
-# sai de consulta na base dele. Acima disso o bloco vira um aviso em vez de
-# linhas.
-#
-# Os valores distintos medidos na massa de teste mostram onde ela fica: CODEVE 78,
-# CODCCU 87, depois um vao ate CADATU e FICREG com 496, CODESC e CODHOR com 847,
-# NUMCAD com 1.179. O limite cai dentro desse vao.
-#
-# Vale para TODOS os campos: exececao por campo ja existiu aqui e foi tirada.
-LIMITE_VALORES = 100
+# Nao ha limite de valores por bloco. Ja houve um (100, calibrado pelos valores
+# distintos da massa de teste), mas ele escondia o bloco pela CONTAGEM, e o que
+# manda e a ORIGEM: identificador que sai da planilha de codigos do colaborador
+# (ver CAMPO_DA_LISTA) nunca e pergunta, tenha 36 valores ou 1.327; e codigo da
+# empresa que o cliente realmente mapeia deve aparecer inteiro, por maior que
+# seja. Com o limite, CADATU e FICREG viravam pergunta numa carga pequena e
+# sumiam numa grande.
+
+# Campo cuja traducao sai da planilha de codigos do colaborador, e nao do
+# De/Para: ele e os que consultam a tabela dele (De-Para [cliente] - como
+# NUMCAD, hoje CADATU e FICREG) saem com aviso no lugar das linhas.
+CAMPO_DA_LISTA = "NUMCAD"
 
 AZUL = "1F3864"
 AMARELO = "FFE699"
@@ -131,10 +133,20 @@ def levantar(parametros, achados=None, leiautes=None):
             # usa o numero gerado, e campo sem caminho nao tem valor a traduzir.
             if depara.sai_de_sequencial(c, parametros) or not c.get("caminho"):
                 continue
-            reg = campos.setdefault(c["campo"], {
-                "campo": c["campo"], "descricao": c.get("descricao", ""),
+            # 'por caminho': uma entrada por TAG lida, e nao uma por campo
+            # Senior. Sao perguntas diferentes -- o mesmo numero significa
+            # coisas diferentes na tag antiga e na nova.
+            for caminho_alt in (depara.nome_depara(c, a)
+                                for a in (c["caminho"].split("|")
+                                          if c.get("por_caminho") else [""])):
+              reg = campos.setdefault(caminho_alt or c["campo"], {
+                "campo": caminho_alt or c["campo"],
+                "campo_senior": c["campo"],
+                "tag": caminho_alt if c.get("por_caminho") else "",
+                "descricao": c.get("descricao", ""),
                 "lista": c.get("lista") if c.get("lista") in listas else None,
                 "leiautes": [], "tipo": c.get("tipo_depara", ""),
+                "por_caminho": bool(c.get("por_caminho")),
                 # mascara do campo Senior: diz o formato esperado sem o cliente
                 # ter que abrir o layout para descobrir
                 # a aba "Mascara De-Para" tem precedencia: e ela que resolve
@@ -142,15 +154,21 @@ def levantar(parametros, achados=None, leiautes=None):
                 "mascara": (parametros.get("mascaras_depara") or {}).get(
                     c["campo"], c.get("mascara", "")),
                 # De-Para geral ja pronto na planilha de parametro, quando existe
-                "sugestao": (parametros.get("deparas_dominio") or {}).get(c["campo"], []),
-            })
-            reg["leiautes"].append(cod)
-            if not reg["lista"] and c.get("lista") in listas:
-                reg["lista"] = c["lista"]
-            if not reg["descricao"]:
-                reg["descricao"] = c.get("descricao", "")
-            if not reg.get("mascara"):
-                reg["mascara"] = c.get("mascara", "")
+                "sugestao": (parametros.get("deparas_dominio") or {}).get(
+                    caminho_alt or c["campo"], []),
+                # o extrator ja traduz esses pela lista de codigos do
+                # colaborador: o cliente nao responde aqui, entrega aquela
+                # planilha (NUMCAD e quem consulta a tabela "como NUMCAD")
+                "pela_lista": c["campo"] == CAMPO_DA_LISTA
+                              or c.get("arg") == CAMPO_DA_LISTA,
+              })
+              reg["leiautes"].append(cod)
+              if not reg["lista"] and c.get("lista") in listas:
+                  reg["lista"] = c["lista"]
+              if not reg["descricao"]:
+                  reg["descricao"] = c.get("descricao", "")
+              if not reg.get("mascara"):
+                  reg["mascara"] = c.get("mascara", "")
 
     # valores vistos na massa, por campo
     vistos = {}
@@ -172,17 +190,27 @@ def levantar(parametros, achados=None, leiautes=None):
                     continue
                 for r in alvo:
                     usados.add(r["campo"])
-                blocos.append({
-                    "titulo": _amigavel(alvo[0]["descricao"], alvo[0]["campo"]),
-                    "campos": sorted({r["campo"] for r in alvo}),
-                    "leiautes": sorted({l for r in alvo for l in r["leiautes"]}),
-                    "lista": chave,
-                    "opcoes": [(str(p[0]), str(p[1]) if len(p) > 1 else "")
-                               for p in listas[chave]],
-                    "vistos": vistos.get(alvo[0]["campo"], {}),
-                    "mascara": alvo[0].get("mascara", ""),
-                    "sugestao": alvo[0].get("sugestao", []),
-                })
+                # Campos diferentes que usam a MESMA lista Senior sao uma
+                # pergunta so -- menos os 'por caminho', em que cada tag tem o
+                # seu dominio e precisa de bloco proprio.
+                grupos = ([[r] for r in alvo] if any(r.get("por_caminho")
+                                                     for r in alvo)
+                          else [alvo])
+                for grupo in grupos:
+                    blocos.append({
+                        "titulo": _amigavel(grupo[0]["descricao"],
+                                            grupo[0]["campo_senior"]),
+                        "campos": sorted({r["campo"] for r in grupo}),
+                        "campo_senior": grupo[0].get("campo_senior"),
+                        "tag": grupo[0].get("tag", ""),
+                        "leiautes": sorted({l for r in grupo for l in r["leiautes"]}),
+                        "lista": chave,
+                        "opcoes": [(str(p[0]), str(p[1]) if len(p) > 1 else "")
+                                   for p in listas[chave]],
+                        "vistos": vistos.get(grupo[0]["campo"], {}),
+                        "mascara": grupo[0].get("mascara", ""),
+                        "sugestao": grupo[0].get("sugestao", []),
+                    })
             elif chave in campos:                    # campo sem lista fechada
                 r = campos[chave]
                 usados.add(chave)
@@ -271,6 +299,11 @@ def gerar(parametros, achados=None, origem='eSocial', rubricas=None,
             eventos = [e.replace("S-", "") for e in c.get("eventos") or []]
             mapa = descricoes.setdefault(campo, {})
             for caminho in c["caminho"].split("|"):
+                # 'por caminho': a descricao tambem e por tag, senao o dominio
+                # da tag nova descreveria o codigo da antiga
+                if c.get("por_caminho"):
+                    mapa = descricoes.setdefault(
+                        depara.nome_depara(c, caminho), {})
                 for parte in caminho.split("+"):
                     resto = "_".join(parte.strip().split("/")[1:])
                     if not resto:
@@ -283,8 +316,51 @@ def gerar(parametros, achados=None, origem='eSocial', rubricas=None,
                         ).get("itens") or []
                         for v in valores:
                             mapa.setdefault(v["codigo"], v["descricao"])
-            if not mapa:
-                del descricoes[campo]
+            for chave_desc in list(descricoes):
+                if not descricoes[chave_desc]:
+                    del descricoes[chave_desc]
+
+    # Campo cujo codigo eSocial e ANTIGO e nao existe mais na documentacao
+    # publicada: o gov.br so mantem o S-1.3 no ar, e o dominios_esocial.json sai
+    # dele. Aqui a descricao vem da lista do Senior, e so quando as duas tabelas
+    # sao a MESMA, codigo por codigo -- nao serve para ESTCIV nem RACCOR, onde o
+    # codigo Senior e o do eSocial divergem.
+    #
+    # VISEST/classTrabEstrang: a LVisEst do Senior reproduz, palavra por
+    # palavra, a tabela do leiaute v2.5 (1 Visto permanente ... 12 Tratado de
+    # Amizade). Derivado da lista Senior, NAO conferido no gov.br: a pagina da
+    # v2.5 saiu do ar. O condIng do S-1.3 e outra tabela e nao entra aqui.
+    DA_LISTA_SENIOR = {"classTrabEstrang": "LVisEst"}
+    listas_senior = _carregar("listas.json")
+    for campo, nome_lista in DA_LISTA_SENIOR.items():
+        mapa = descricoes.setdefault(campo, {})
+        for par in listas_senior.get(nome_lista) or []:
+            codigo = str(par[0]).strip()
+            texto = str(par[1]) if len(par) > 1 else ""
+            mapa.setdefault(codigo, texto)
+            mapa.setdefault(codigo.lstrip("0") or "0", texto)
+
+    # Municipio nao esta em tabela do eSocial nem nos valores validos do campo:
+    # o leiaute so manda o codMunic e aponta para o IBGE. Sem isso o cliente
+    # recebia "3550308" sem nada ao lado e teria que consultar cidade por
+    # cidade. Nao traduz nada -- so descreve o codigo que ele tem que mapear.
+    try:
+        municipios = _carregar("municipios_ibge.json").get("itens") or {}
+    except OSError:
+        municipios = {}
+    if municipios:
+        for mod in (parametros.get("modulos") or {}).values():
+            for c in mod.get("campos") or []:
+                campo, caminho = c.get("campo"), c.get("caminho") or ""
+                if not campo or not c["acao"].startswith("DEPARA"):
+                    continue
+                if not any(parte.strip().split("/")[-1] == "codMunic"
+                           for alt in caminho.split("|")
+                           for parte in alt.split("+")):
+                    continue
+                mapa = descricoes.setdefault(campo, {})
+                for codigo, nome in municipios.items():
+                    mapa.setdefault(codigo, nome)
 
     if rubricas:
         por_codigo = {}
@@ -352,7 +428,10 @@ def gerar(parametros, achados=None, origem='eSocial', rubricas=None,
             linha += 1
 
             ctx = "campo %s%s · usado no%s layout%s %s" % (
-                ", ".join(b["campos"]),
+                # com 'por caminho' o que identifica o bloco e a tag do XML,
+                # nao o campo Senior: os dois blocos sao do mesmo campo
+                ("%s · tag %s do eSocial" % (b["campo_senior"], b["tag"])
+                 if b.get("tag") else ", ".join(b["campos"])),
                 # a mascara do layout Senior evita o cliente descobrir o formato
                 # depois, quando a importacao recusar o valor
                 (" · formato do código Senior %s" % b["mascara"]) if b.get("mascara") else "",
@@ -840,15 +919,14 @@ def _bloco_empresa(ws, linha, reg, borda, descricao=None):
     """Mesmo formato dos campos sem dominio: o cliente lista o que usa."""
     from openpyxl.styles import Font, PatternFill, Alignment, Protection
     achou = sorted(reg.get("vistos", {}).items(), key=lambda x: -x[1])
-    return _tabela_livre(ws, linha + 1, reg["campo"], achou,
-                         len(achou) > LIMITE_VALORES, borda,
+    return _tabela_livre(ws, linha + 1, reg["campo"], achou, borda,
                          Font, PatternFill, Alignment, Protection, descricao,
-                         reg.get("mascara", ""))
+                         reg.get("mascara", ""), reg.get("pela_lista", False))
 
 
-def _tabela_livre(ws, linha, campo, achou, muitos, borda,
+def _tabela_livre(ws, linha, campo, achou, borda,
                   Font, PatternFill, Alignment, Protection, descricao=None,
-                  mascara=""):
+                  mascara="", pela_lista=False):
     """Bloco de campo sem dominio fechado no Senior.
 
     Mesma ordem de colunas dos blocos com dominio: codigo Senior na esquerda,
@@ -868,11 +946,13 @@ def _tabela_livre(ws, linha, campo, achou, muitos, borda,
         c.border = borda
         c.alignment = Alignment(horizontal="center", vertical="center")
 
-    if muitos:
+    if pela_lista:
         ws.merge_cells(start_row=linha, start_column=1, end_row=linha, end_column=4)
         c = ws.cell(row=linha, column=1, value=(
-            "  Aparecem %d valores diferentes no seu XML — um por registro. "
-            "A correspondência sai de consulta na sua base, não de digitação."
+            "  Este campo vem da planilha de códigos do colaborador (um "
+            "CPF/matrícula por linha, com o código do Senior). Não preencha "
+            "aqui — são %d valores, um por registro. Entregue aquela "
+            "planilha e o extrator faz a correspondência sozinho."
             % len(achou)))
         c.font = Font(name=FONTE, size=10, italic=True, color="6B7C8C")
         c.alignment = Alignment(vertical="center", wrap_text=True)
